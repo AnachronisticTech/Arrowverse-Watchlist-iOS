@@ -3,29 +3,50 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		91B8023224BC598800C4BC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023124BC598800C4BC31 /* AppDelegate.swift */; };
 		91B8023424BC598800C4BC31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023324BC598800C4BC31 /* SceneDelegate.swift */; };
-		91B8023624BC598800C4BC31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023524BC598800C4BC31 /* ViewController.swift */; };
+		91B8023624BC598800C4BC31 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023524BC598800C4BC31 /* ListViewController.swift */; };
 		91B8023924BC598800C4BC31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023724BC598800C4BC31 /* Main.storyboard */; };
 		91B8023C24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */; };
 		91B8023E24BC598F00C4BC31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023D24BC598F00C4BC31 /* Assets.xcassets */; };
 		91B8024124BC598F00C4BC31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */; };
+		91B8024A24BC5B4500C4BC31 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 91B8024924BC5B4500C4BC31 /* SwiftSoup */; };
+		91B8024C24BC8B0000C4BC31 /* ListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */; };
+		91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */; };
+		91B8025224BCD03300C4BC31 /* SelectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025124BCD03300C4BC31 /* SelectViewCell.xib */; };
+		91B8025424BCD5FA00C4BC31 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025324BCD5FA00C4BC31 /* Show.swift */; };
+		91B8025624BCD80800C4BC31 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025524BCD80800C4BC31 /* State.swift */; };
+		91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025724BE204300C4BC31 /* NextViewController.swift */; };
+		91B8025A24BE274A00C4BC31 /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025924BE274A00C4BC31 /* NextViewCell.xib */; };
+		91B8025C24BE2E6900C4BC31 /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */; };
+		91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025D24BE2EE400C4BC31 /* Episode.swift */; };
+		91B8026024BE2FED00C4BC31 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025F24BE2FED00C4BC31 /* UserInterface.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		91B8022E24BC598800C4BC31 /* Arrowverse Watchlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B8023124BC598800C4BC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91B8023324BC598800C4BC31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		91B8023524BC598800C4BC31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		91B8023524BC598800C4BC31 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		91B8023824BC598800C4BC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		91B8023B24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Arrowverse_Watchlist.xcdatamodel; sourceTree = "<group>"; };
 		91B8023D24BC598F00C4BC31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91B8024024BC598F00C4BC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91B8024224BC598F00C4BC31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewCell.xib; sourceTree = "<group>"; };
+		91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		91B8025124BCD03300C4BC31 /* SelectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectViewCell.xib; sourceTree = "<group>"; };
+		91B8025324BCD5FA00C4BC31 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		91B8025524BCD80800C4BC31 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		91B8025724BE204300C4BC31 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		91B8025924BE274A00C4BC31 /* NextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextViewCell.xib; sourceTree = "<group>"; };
+		91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
+		91B8025D24BE2EE400C4BC31 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		91B8025F24BE2FED00C4BC31 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91B8024A24BC5B4500C4BC31 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +81,19 @@
 			isa = PBXGroup;
 			children = (
 				91B8023124BC598800C4BC31 /* AppDelegate.swift */,
+				91B8025324BCD5FA00C4BC31 /* Show.swift */,
+				91B8025524BCD80800C4BC31 /* State.swift */,
+				91B8025D24BE2EE400C4BC31 /* Episode.swift */,
 				91B8023324BC598800C4BC31 /* SceneDelegate.swift */,
-				91B8023524BC598800C4BC31 /* ViewController.swift */,
+				91B8025F24BE2FED00C4BC31 /* UserInterface.swift */,
+				91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */,
+				91B8023524BC598800C4BC31 /* ListViewController.swift */,
+				91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */,
+				91B8025724BE204300C4BC31 /* NextViewController.swift */,
 				91B8023724BC598800C4BC31 /* Main.storyboard */,
+				91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */,
+				91B8025124BCD03300C4BC31 /* SelectViewCell.xib */,
+				91B8025924BE274A00C4BC31 /* NextViewCell.xib */,
 				91B8023D24BC598F00C4BC31 /* Assets.xcassets */,
 				91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */,
 				91B8024224BC598F00C4BC31 /* Info.plist */,
@@ -86,6 +118,9 @@
 			dependencies = (
 			);
 			name = "Arrowverse Watchlist";
+			packageProductDependencies = (
+				91B8024924BC5B4500C4BC31 /* SwiftSoup */,
+			);
 			productName = "Arrowverse Watchlist";
 			productReference = 91B8022E24BC598800C4BC31 /* Arrowverse Watchlist.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +149,9 @@
 				Base,
 			);
 			mainGroup = 91B8022524BC598800C4BC31;
+			packageReferences = (
+				91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = 91B8022F24BC598800C4BC31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,9 +166,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91B8024C24BC8B0000C4BC31 /* ListViewCell.xib in Resources */,
 				91B8024124BC598F00C4BC31 /* LaunchScreen.storyboard in Resources */,
 				91B8023E24BC598F00C4BC31 /* Assets.xcassets in Resources */,
+				91B8025224BCD03300C4BC31 /* SelectViewCell.xib in Resources */,
 				91B8023924BC598800C4BC31 /* Main.storyboard in Resources */,
+				91B8025A24BE274A00C4BC31 /* NextViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,10 +182,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B8023624BC598800C4BC31 /* ViewController.swift in Sources */,
+				91B8025424BCD5FA00C4BC31 /* Show.swift in Sources */,
+				91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */,
+				91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */,
+				91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */,
+				91B8023624BC598800C4BC31 /* ListViewController.swift in Sources */,
 				91B8023C24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld in Sources */,
 				91B8023224BC598800C4BC31 /* AppDelegate.swift in Sources */,
+				91B8025C24BE2E6900C4BC31 /* CoreDataFunctions.swift in Sources */,
+				91B8025624BCD80800C4BC31 /* State.swift in Sources */,
 				91B8023424BC598800C4BC31 /* SceneDelegate.swift in Sources */,
+				91B8026024BE2FED00C4BC31 /* UserInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +339,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SDPTWQFVDC;
 				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +358,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SDPTWQFVDC;
 				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,6 +392,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		91B8024924BC5B4500C4BC31 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */ = {

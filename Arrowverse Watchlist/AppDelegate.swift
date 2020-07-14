@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+let formatter = DateFormatter()
+let timezone = TimeZone(abbreviation: "GMT+0:00")!
+let calendar = Calendar.current
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = timezone
+        
         return true
     }
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="110" id="rgg-m8-CH5" customClass="SelectViewCell" customModule="Arrowverse_Watchlist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rgg-m8-CH5" id="qVg-r0-POv">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSb-sa-yTJ">
+                        <rect key="frame" x="0.0" y="4" width="414" height="100"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sxe-Bh-DGF">
+                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="Sad-De-RdA"/>
+                                    <constraint firstAttribute="width" secondItem="Sxe-Bh-DGF" secondAttribute="height" multiplier="1:1" id="XAa-x2-pFj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0G-SH-69N">
+                                <rect key="frame" x="100" y="8" width="306" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="cmf-ed-1ZX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Sxe-Bh-DGF" secondAttribute="bottom" constant="8" id="0Vr-3v-nYu"/>
+                            <constraint firstItem="r0G-SH-69N" firstAttribute="top" secondItem="OSb-sa-yTJ" secondAttribute="top" constant="8" id="5SC-Tk-nNa"/>
+                            <constraint firstAttribute="bottom" secondItem="r0G-SH-69N" secondAttribute="bottom" constant="8" id="L51-3T-hKS"/>
+                            <constraint firstItem="Sxe-Bh-DGF" firstAttribute="top" secondItem="OSb-sa-yTJ" secondAttribute="top" constant="8" id="eJi-jr-BfP"/>
+                            <constraint firstItem="r0G-SH-69N" firstAttribute="leading" secondItem="Sxe-Bh-DGF" secondAttribute="trailing" constant="8" id="euD-SL-8MB"/>
+                            <constraint firstAttribute="trailing" secondItem="r0G-SH-69N" secondAttribute="trailing" constant="8" id="o0a-VD-mXt"/>
+                            <constraint firstItem="Sxe-Bh-DGF" firstAttribute="leading" secondItem="OSb-sa-yTJ" secondAttribute="leading" constant="8" id="vVD-pR-NxW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OSb-sa-yTJ" firstAttribute="leading" secondItem="qVg-r0-POv" secondAttribute="leading" id="8nF-83-Ify"/>
+                    <constraint firstAttribute="trailing" secondItem="OSb-sa-yTJ" secondAttribute="trailing" id="U2S-WY-q9n"/>
+                    <constraint firstItem="OSb-sa-yTJ" firstAttribute="top" secondItem="qVg-r0-POv" secondAttribute="top" constant="4" id="cEe-gt-pgA"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OSb-sa-yTJ" secondAttribute="bottom" constant="4" id="dZ3-pU-g6y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="background" destination="OSb-sa-yTJ" id="yfh-jS-IgC"/>
+                <outlet property="icon" destination="Sxe-Bh-DGF" id="fw6-xv-4hV"/>
+                <outlet property="title" destination="r0G-SH-69N" id="clq-6k-3w5"/>
+            </connections>
+            <point key="canvasLocation" x="127.53623188405798" y="137.27678571428569"/>
+        </tableViewCell>
+    </objects>
+</document>
