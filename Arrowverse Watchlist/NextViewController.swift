@@ -23,6 +23,9 @@ class NextViewController: UIViewController, UITableViewDelegate {
         listView.dataSource = self
         listView.register(UINib(nibName: "NextViewCell", bundle: nil), forCellReuseIdentifier: "button")
         listView.backgroundColor = .clear
+        let footer = UIView()
+        footer.backgroundColor = .clear
+        listView.tableFooterView = footer
         
         shows = State.shows
         let episodes = fetchAllEpisodes()
