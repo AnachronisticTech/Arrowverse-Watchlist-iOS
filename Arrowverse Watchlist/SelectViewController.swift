@@ -51,7 +51,9 @@ extension SelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let show = Show.allCases[indexPath.row]
+        if shows.count == 1 && shows.contains(show) { return }
         if shows.contains(show) {
             shows.remove(show)
         } else {
@@ -63,7 +65,6 @@ extension SelectViewController: UITableViewDataSource {
         } else {
             cell.background.backgroundColor = .lightGray
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

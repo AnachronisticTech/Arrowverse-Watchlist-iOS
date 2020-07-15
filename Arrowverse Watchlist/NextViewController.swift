@@ -71,6 +71,7 @@ extension NextViewController: UITableViewDataSource {
         updateEpisode(withID: episode.identifier, as: true)
         getLatestEpisodes()
         tableView.reloadData()
+        State.shouldChange = true
     }
     
 }
