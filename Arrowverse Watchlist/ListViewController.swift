@@ -16,7 +16,8 @@ class ListViewController: UIViewController, UITableViewDelegate {
     var episodes = [Episode]()
     var library: [Show: [Episode]] = [
         .Arrow: [], .Constantine: [], .Flash: [], .Legends: [],
-        .Supergirl: [], .Vixen: [], .BlackLightning: [], .Batwoman: []
+        .Supergirl: [], .Vixen: [], .BlackLightning: [], .Batwoman: [],
+        .Titans: [], .DoomPatrol: [], .Stargirl: []
     ] {
         didSet {
             var shouldUpdateList = false
@@ -49,17 +50,25 @@ class ListViewController: UIViewController, UITableViewDelegate {
                         season += 1
                         
                         if let rows = try? table.select("tr").array().dropFirst() {
+                            var episodeName = ""
                             for row in rows {
                                 if let cells = try? row.select("td").array() {
                                     var details = cells.map { try! $0.text().replacingOccurrences(of: "\"", with: "") }
-                                    if show == .Constantine { details.insert("", at: 0) }
+                                    if [.DoomPatrol, .Stargirl].contains(show), details.count <= 1 { continue }
+                                    var episodeNumber = Int(details[show.isFromWikipedia ? 0 : 1]) ?? 0
+                                    if show == .Stargirl {
+                                        if details.count == 5 { episodeName = details[0] }
+                                        else { details.insert("\(episodeName), Part II", at: 0) }
+                                        episodeNumber = Int(String(details[4].dropFirst(7))) ?? 0
+                                    }
+                                    if [.Constantine, .Stargirl].contains(show) { details.insert("", at: 0) }
                                     formatter.dateFormat = "MMMM dd, yyyy\(show.isFromWikipedia ? " (yyyy-mm-dd)" : "")"
                                     guard let date = formatter.date(from: show.isFromWikipedia ? details[4] : details.last!) else { continue }
                                     let components = calendar.dateComponents(in: timezone, from: date)
                                     let episode = Episode(
                                         show,
                                         season,
-                                        Int(details[show.isFromWikipedia ? 0 : 1]) ?? 0,
+                                        episodeNumber,
                                         details[show.isFromWikipedia ? 1 : 2],
                                         calendar.date(from: components)!
                                     )
@@ -120,6 +129,7 @@ extension ListViewController: UITableViewDataSource {
         let episode = episodes[indexPath.row]
         let cell: ListViewCell = tableView.dequeueReusableCell(withIdentifier: "episode") as! ListViewCell
         cell.title.text = episode.title
+        formatter.dateFormat = "MMMM dd, yyyy"
         cell.detail.text = "\(episode.show.name) \(episode.id) - \(formatter.string(from: episode.aired))"
         cell.icon.image = episode.show.icon
         if let local = fetchEpisode(withID: episode.identifier) {

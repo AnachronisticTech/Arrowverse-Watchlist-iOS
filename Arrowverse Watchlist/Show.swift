@@ -11,6 +11,7 @@ import UIKit
 enum Show: String, CaseIterable {
     case Arrow, Constantine, Flash, Legends
     case Supergirl, Vixen, BlackLightning, Batwoman
+    case Titans, DoomPatrol, Stargirl
     
     var name: String {
         switch self {
@@ -22,6 +23,9 @@ enum Show: String, CaseIterable {
             case .Vixen: return "Vixen"
             case .BlackLightning: return "Black Lightning"
             case .Batwoman: return "Batwoman"
+            case .Titans: return "Titans"
+            case .DoomPatrol: return "Doom Patrol"
+            case .Stargirl: return "Stargirl"
         }
     }
     
@@ -35,40 +39,38 @@ enum Show: String, CaseIterable {
             case .Vixen: return "VIX"
             case .BlackLightning: return "BLA"
             case .Batwoman: return "BAT"
+            case .Titans: return "TTN"
+            case .DoomPatrol: return "PAT"
+            case .Stargirl: return "STA"
+        }
+    }
+    
+    private var constantName: String {
+        switch self {
+            case .Arrow: return "arrow"
+            case .Constantine: return "constantine"
+            case .Flash: return "flash"
+            case .Legends: return "legends"
+            case .Supergirl: return "supergirl"
+            case .Vixen: return "vixen"
+            case .BlackLightning: return "blackLightning"
+            case .Batwoman: return "batwoman"
+            case .Titans: return "titans"
+            case .DoomPatrol: return "doomPatrol"
+            case .Stargirl: return "stargirl"
         }
     }
     
     var color: CGColor {
-        switch self {
-        case .Arrow: return UIColor(named: "arrow")!.cgColor
-            case .Constantine: return UIColor(named: "constantine")!.cgColor
-            case .Flash: return UIColor(named: "flash")!.cgColor
-            case .Legends: return UIColor(named: "legends")!.cgColor
-            case .Supergirl: return UIColor(named: "supergirl")!.cgColor
-            case .Vixen: return UIColor(named: "vixen")!.cgColor
-            case .BlackLightning: return UIColor(named: "blackLightning")!.cgColor
-            case .Batwoman: return UIColor(named: "batwoman")!.cgColor
-        }
+        return UIColor(named: constantName)!.cgColor
     }
     
     var icon: UIImage {
-        switch self {
-        case .Arrow: return UIImage(named: "arrow")!
-        case .Constantine: return UIImage(named: "constantine")!
-        case .Flash: return UIImage(named: "flash")!
-        case .Legends: return UIImage(named: "legends")!
-        case .Supergirl: return UIImage(named: "supergirl")!
-        case .Vixen: return UIImage(named: "vixen")!
-        case .BlackLightning: return UIImage(named: "blackLightning")!
-        case .Batwoman: return UIImage(named: "batwoman")!
-        }
+        return UIImage(named: constantName)!
     }
     
     private var baseURL: String {
-        switch self {
-            case .BlackLightning: return "https://en.wikipedia.org/wiki/"
-            default: return "https://arrow.fandom.com/wiki/"
-        }
+        return isFromWikipedia ? "https://en.wikipedia.org/wiki/" : "https://arrow.fandom.com/wiki/"
     }
     
     private var episodeListURL: String {
@@ -81,17 +83,18 @@ enum Show: String, CaseIterable {
             case .Vixen: return "List_of_Vixen_episodes"
             case .BlackLightning: return "List_of_Black_Lightning_episodes"
             case .Batwoman: return "List_of_Batwoman_episodes"
+            case .Titans: return "Titans_(2018_TV_series)"
+            case .DoomPatrol: return "Doom_Patrol_(TV_series)"
+            case .Stargirl: return "Stargirl_(TV_series)"
         }
     }
     
     var url: URL {
-        return URL(string: "\(self.baseURL)\(self.episodeListURL)")!
+        return URL(string: "\(baseURL)\(episodeListURL)")!
     }
     
     var isFromWikipedia: Bool {
-        switch self {
-            case .BlackLightning: return true
-            default: return false
-        }
+        let shows: [Show] = [.BlackLightning, .Titans, .DoomPatrol, .Stargirl]
+        return shows.contains(self)
     }
 }
