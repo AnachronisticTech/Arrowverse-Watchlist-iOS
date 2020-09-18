@@ -55,6 +55,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
                                 if let cells = try? row.select("td").array() {
                                     var details = cells.map { try! $0.text().replacingOccurrences(of: "\"", with: "") }
                                     if [.DoomPatrol, .Stargirl].contains(show), details.count <= 1 { continue }
+                                    if show == .DoomPatrol, details.count < 4 { continue }
                                     var episodeNumber = Int(details[show.isFromWikipedia ? 0 : 1]) ?? 0
                                     if show == .Stargirl {
                                         if details.count == 5 { episodeName = details[0] }
