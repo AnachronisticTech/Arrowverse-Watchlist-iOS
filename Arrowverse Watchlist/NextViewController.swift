@@ -58,7 +58,7 @@ extension NextViewController: UITableViewDataSource {
         let cell: NextViewCell = tableView.dequeueReusableCell(withIdentifier: "button") as! NextViewCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.width, bottom: 0, right: 0)
         cell.background.layer.cornerRadius = 10
-        cell.background.backgroundColor = UIColor(cgColor: episode.show.color)
+        cell.background.backgroundColor = episode.show.color
         cell.title.text = episode.title
         cell.detail.text = "\(episode.show.name) \(episode.id)"
         cell.icon.image = episode.show.icon

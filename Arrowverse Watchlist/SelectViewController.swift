@@ -43,7 +43,7 @@ extension SelectViewController: UITableViewDataSource {
         let state = shows.contains(show)
         let cell: SelectViewCell = tableView.dequeueReusableCell(withIdentifier: "button") as! SelectViewCell
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.width, bottom: 0, right: 0)
-        cell.background.backgroundColor = state ? UIColor(cgColor: show.color) : .lightGray
+        cell.background.backgroundColor = state ? show.color : .lightGray
         cell.background.layer.cornerRadius = 10
         cell.title.text = show.name.uppercased()
         cell.icon.image = show.icon
@@ -61,7 +61,7 @@ extension SelectViewController: UITableViewDataSource {
         }
         let cell = tableView.cellForRow(at: indexPath) as! SelectViewCell
         if shows.contains(show) {
-            cell.background.backgroundColor = UIColor(cgColor: show.color)
+            cell.background.backgroundColor = show.color
         } else {
             cell.background.backgroundColor = .lightGray
         }

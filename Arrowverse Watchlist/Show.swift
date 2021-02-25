@@ -11,7 +11,7 @@ import UIKit
 enum Show: String, CaseIterable {
     case Arrow, Constantine, Flash, Legends
     case Supergirl, Vixen, BlackLightning, Batwoman
-    case Titans, DoomPatrol, Stargirl
+    case Titans, DoomPatrol, Stargirl, Superman
     
     var name: String {
         switch self {
@@ -26,6 +26,7 @@ enum Show: String, CaseIterable {
             case .Titans: return "Titans"
             case .DoomPatrol: return "Doom Patrol"
             case .Stargirl: return "Stargirl"
+            case .Superman: return "Superman & Lois"
         }
     }
     
@@ -42,6 +43,7 @@ enum Show: String, CaseIterable {
             case .Titans: return "TTN"
             case .DoomPatrol: return "PAT"
             case .Stargirl: return "STA"
+            case .Superman: return "SaL"
         }
     }
     
@@ -58,11 +60,12 @@ enum Show: String, CaseIterable {
             case .Titans: return "titans"
             case .DoomPatrol: return "doomPatrol"
             case .Stargirl: return "stargirl"
+            case .Superman: return "superman"
         }
     }
     
-    var color: CGColor {
-        return UIColor(named: constantName)!.cgColor
+    var color: UIColor {
+        return UIColor(named: constantName)!
     }
     
     var icon: UIImage {
@@ -86,6 +89,7 @@ enum Show: String, CaseIterable {
             case .Titans: return "Titans_(2018_TV_series)"
             case .DoomPatrol: return "Doom_Patrol_(TV_series)"
             case .Stargirl: return "Stargirl_(TV_series)"
+            case .Superman: return "List_of_Superman_&_Lois_episodes"
         }
     }
     

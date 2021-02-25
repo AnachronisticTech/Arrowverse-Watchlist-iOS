@@ -17,7 +17,7 @@ class ListViewController: UIViewController, UITableViewDelegate {
     var library: [Show: [Episode]] = [
         .Arrow: [], .Constantine: [], .Flash: [], .Legends: [],
         .Supergirl: [], .Vixen: [], .BlackLightning: [], .Batwoman: [],
-        .Titans: [], .DoomPatrol: [], .Stargirl: []
+        .Titans: [], .DoomPatrol: [], .Stargirl: [], .Superman: []
     ] {
         didSet {
             var shouldUpdateList = false
@@ -134,7 +134,7 @@ extension ListViewController: UITableViewDataSource {
         cell.detail.text = "\(episode.show.name) \(episode.id) - \(formatter.string(from: episode.aired))"
         cell.icon.image = episode.show.icon
         if let local = fetchEpisode(withID: episode.identifier) {
-            cell.layer.backgroundColor = local.1 ? UIColor.lightGray.cgColor : episode.show.color
+            cell.contentView.backgroundColor = local.1 ? UIColor.lightGray : episode.show.color
         }
         return cell
     }
@@ -145,7 +145,7 @@ extension ListViewController: UITableViewDataSource {
         if let local = fetchEpisode(withID: episode.identifier) {
             updateEpisode(withID: episode.identifier, as: !local.1)
             let cell = tableView.cellForRow(at: indexPath) as! ListViewCell
-            cell.layer.backgroundColor = !local.1 ? UIColor.lightGray.cgColor : episode.show.color
+            cell.contentView.backgroundColor = !local.1 ? UIColor.lightGray : episode.show.color
         }
     }
     
