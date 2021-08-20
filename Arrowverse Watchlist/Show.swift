@@ -46,6 +46,23 @@ enum Show: String, CaseIterable {
             case .Superman: return "SaL"
         }
     }
+
+    var tvdbId: Int {
+        switch self {
+            case .Arrow: return 1412
+            case .Constantine: return 60743
+            case .Flash: return 60735
+            case .Legends: return 62643
+            case .Supergirl: return 62688
+            case .Vixen: return 62125
+            case .BlackLightning: return 71663
+            case .Batwoman: return 89247
+            case .Titans: return 75450
+            case .DoomPatrol: return 79501
+            case .Stargirl: return 80986
+            case .Superman: return 95057
+        }
+    }
     
     private var constantName: String {
         switch self {

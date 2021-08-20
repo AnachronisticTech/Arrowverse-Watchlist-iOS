@@ -31,7 +31,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
             }
             if shouldUpdateList {
                 DispatchQueue.main.async {
-                    self.episodes = fetchAllEpisodes().map({ $0.0 }).filter({ State.shows.contains($0.show) }).sorted(by: { ($0.aired) < ($1.aired) })
+                    self.episodes = fetchAllEpisodes()
+                        .map { $0.0 }
+                        .filter { State.shows.contains($0.show) }
+                        .sorted(by: { ($0.aired) < ($1.aired) })
                     self.listView.reloadData()
                 }
             }
@@ -103,7 +106,10 @@ class ListViewController: UIViewController, UITableViewDelegate {
             State.shows = shows
         }
 
-        episodes = fetchAllEpisodes().map({ $0.0 }).filter({ State.shows.contains($0.show) }).sorted(by: { ($0.aired) < ($1.aired) })
+        episodes = fetchAllEpisodes()
+            .map { $0.0 }
+            .filter { State.shows.contains($0.show) }
+            .sorted(by: { ($0.aired) < ($1.aired) })
         DispatchQueue.main.async {
             self.listView.reloadData() // BUG: First visible rows don't render air dates
         }
