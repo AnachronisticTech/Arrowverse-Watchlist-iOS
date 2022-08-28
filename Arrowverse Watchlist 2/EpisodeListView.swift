@@ -7,63 +7,49 @@
 //
 
 import SwiftUI
+import CoreData
 import TVDBKit
+import SwiftUIRefresh
 
 struct EpisodeListView: View {
-    @State private var episodes = [(Episode, Show)]()
+    @Environment(\.managedObjectContext) private var viewContext
+
     @State private var isShowingError: TVDBError?
     @State private var isShowingFilterSheet = false
+    @State private var isShowingUpNextSheet = false
+    @State private var isShowingReloadIndicator = false
 
     @EnvironmentObject var showDataStore: ShowDataStore
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(episodes, id: \.0.id) { episode, show in
-                    HStack {
-                        HStack {
-                            Image(uiImage: show.icon)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 65, maxHeight: 65)
+                ForEach(showDataStore.episodes) { episode in
+                    EpisodeView(episode: episode)
+                        .onTapGesture {
+                            if episode.airDate < Date(timeIntervalSinceNow: 0) {
+                                showDataStore.toggleWatchedStatus(for: episode)
+                            }
                         }
-                        .frame(width: 65, height: 65, alignment: .center)
-                        VStack(alignment: .leading) {
-                            Text(episode.name)
-                            Text("Airing (episode.airDate)")
-                                .font(.caption)
-                        }
-                        .foregroundColor(.white)
-                    }
-                    .listRowBackground(Color(show.color.cgColor))
                 }
             }
             .id(UUID())
             .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: showDataStore.episodeLibrary) { _ in
-                episodes = showDataStore.projectedEpisodes
-            }
             .onChange(of: showDataStore.trackedShows) { _ in
-                episodes = showDataStore.projectedEpisodes
+                showDataStore.loadEpisodes()
             }
+            .onChange(of: showDataStore.requestsInProgress) { value in
+                isShowingReloadIndicator = value != 0
+            }
+            .pullToRefresh(isShowing: $isShowingReloadIndicator, onRefresh: showDataStore.fetch)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(action: showDataStore.fetch) {
-                        if showDataStore.requestsInProgress == 0 {
-                            Image(systemName: "arrow.clockwise")
-                        } else {
-                            ProgressView()
-                        }
-                    }
-                    .disabled(showDataStore.requestsInProgress > 0)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { isShowingFilterSheet = true }) {
                         Image(systemName: "line.horizontal.3.decrease.circle")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {  }) {
+                    Button(action: { isShowingUpNextSheet = true }) {
                         Image(systemName: "calendar")
                     }
                 }
@@ -78,112 +64,10 @@ struct EpisodeListView: View {
             )
         }
         .sheet(isPresented: $isShowingFilterSheet) {
-            Text("Choose your Arrowverse shows to track")
-                .font(.title)
-                .padding([.top])
-            ScrollView {
-                LazyVStack {
-                    ForEach(Show.allCases, id: \.self) { show in
-                        HStack {
-                            HStack {
-                                Image(uiImage: show.icon)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(maxWidth: 65, maxHeight: 65)
-                            }
-                            .frame(width: 65, height: 65, alignment: .center)
-                            .padding(10)
-                            Text(show.name)
-                                .font(.title)
-                                .foregroundColor(.white)
-                            Spacer()
-                        }
-                        .background(showDataStore.trackedShows.contains(show) ? Color(show.color.cgColor) : Color.gray)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .padding([.leading, .bottom, .trailing], 5)
-                        .onTapGesture {
-                            if showDataStore.trackedShows.contains(show) {
-                                showDataStore.trackedShows.remove(show)
-                            } else {
-                                showDataStore.trackedShows.insert(show)
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal)
-            }
+            ShowFilterList()
         }
-    }
-}
-
-extension Episode: Hashable {
-    public static func == (lhs: Episode, rhs: Episode) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-extension Episode: Identifiable {}
-
-extension TVDBError: Identifiable {
-    public var id: Int {
-        switch self {
-            case .bearerTokenNotSetError: return 0
-            case .transporError(_): return 1
-            case .serverError(_): return 2
-            case .emptyData: return 3
-            case .decodingError(_): return 4
-        }
-    }
-}
-
-class ShowDataStore: ObservableObject {
-    static var shared = ShowDataStore()
-
-    private init() {}
-
-    @Published var requestsInProgress = 0
-    @Published var episodeLibrary = [Show: [Episode]]()
-
-    var projectedEpisodes: [(Episode, Show)] {
-        episodeLibrary
-            .reduce([]) { arr, dict in
-                if trackedShows.contains(dict.key) {
-                    var arr = arr
-                    arr.append(contentsOf: dict.value.map { ($0, dict.key) })
-                    return arr
-                }
-                return arr
-            }
-            .sorted(by: { $0.0.airDate < $1.0.airDate })
-    }
-
-    @Published var trackedShows = Set<Show>([
-        .Arrow, .Constantine, .Flash,
-//        .Legends,
-        .Supergirl, .Vixen, .BlackLightning, .Batwoman,
-        .Titans, .DoomPatrol, .Stargirl, .Superman
-    ])
-
-    func fetch() {
-        for show in trackedShows {
-            requestsInProgress += 1
-            TVDB.Convenience.getEpisodes(ofShowWithId: show.tvdbId) { [self] result in
-                switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(let episodes):
-                        DispatchQueue.main.async {
-                            episodeLibrary[show] = episodes
-                        }
-                }
-                DispatchQueue.main.async {
-                    requestsInProgress -= 1
-                }
-            }
+        .sheet(isPresented: $isShowingUpNextSheet) {
+            UpNextView()
         }
     }
 }

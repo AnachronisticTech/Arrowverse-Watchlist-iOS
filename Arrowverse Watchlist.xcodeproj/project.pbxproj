@@ -18,7 +18,6 @@
 		91B8024C24BC8B0000C4BC31 /* ListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */; };
 		91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */; };
 		91B8025224BCD03300C4BC31 /* SelectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025124BCD03300C4BC31 /* SelectViewCell.xib */; };
-		91B8025424BCD5FA00C4BC31 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025324BCD5FA00C4BC31 /* Show.swift */; };
 		91B8025624BCD80800C4BC31 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025524BCD80800C4BC31 /* State.swift */; };
 		91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025724BE204300C4BC31 /* NextViewController.swift */; };
 		91B8025A24BE274A00C4BC31 /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025924BE274A00C4BC31 /* NextViewCell.xib */; };
@@ -26,7 +25,6 @@
 		91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025D24BE2EE400C4BC31 /* Episode.swift */; };
 		91B8026024BE2FED00C4BC31 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025F24BE2FED00C4BC31 /* UserInterface.swift */; };
 		91D475D126CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */; };
-		91D475D326CD11A200CBABF4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D226CD11A200CBABF4 /* ContentView.swift */; };
 		91D475D826CD11A300CBABF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91D475D726CD11A300CBABF4 /* Preview Assets.xcassets */; };
 		91D475DA26CD11A300CBABF4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D926CD11A300CBABF4 /* Persistence.swift */; };
 		91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld */; };
@@ -35,6 +33,13 @@
 		91D475E726CF1BE800CBABF4 /* TVDBKit in Frameworks */ = {isa = PBXBuildFile; productRef = 91D475E626CF1BE800CBABF4 /* TVDBKit */; };
 		91D475EB26CF9F9100CBABF4 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025324BCD5FA00C4BC31 /* Show.swift */; };
 		91D475ED26CFED5D00CBABF4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475EC26CFED5D00CBABF4 /* Constants.swift */; };
+		91D475EF26D1299300CBABF4 /* ShowFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475EE26D1299300CBABF4 /* ShowFilterList.swift */; };
+		91D475F126D12A2E00CBABF4 /* ShowDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F026D12A2E00CBABF4 /* ShowDataStore.swift */; };
+		91D475F326D12A6A00CBABF4 /* TVDBError+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F226D12A6A00CBABF4 /* TVDBError+Identifiable.swift */; };
+		91D475F526D12ACB00CBABF4 /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F426D12ACB00CBABF4 /* EpisodeView.swift */; };
+		91D475F726D2F15F00CBABF4 /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F626D2F15F00CBABF4 /* UpNextView.swift */; };
+		91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */; };
+		91D475FE26D2FA7800CBABF4 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 91D475FD26D2FA7800CBABF4 /* SwiftUIRefresh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,13 +64,18 @@
 		91B8025F24BE2FED00C4BC31 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
 		91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrowverse_Watchlist_2App.swift; sourceTree = "<group>"; };
-		91D475D226CD11A200CBABF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		91D475D726CD11A300CBABF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		91D475D926CD11A300CBABF4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		91D475DC26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Arrowverse_Watchlist_2.xcdatamodel; sourceTree = "<group>"; };
 		91D475DE26CD11A300CBABF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91D475E326CF1B8A00CBABF4 /* EpisodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListView.swift; sourceTree = "<group>"; };
 		91D475EC26CFED5D00CBABF4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		91D475EE26D1299300CBABF4 /* ShowFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFilterList.swift; sourceTree = "<group>"; };
+		91D475F026D12A2E00CBABF4 /* ShowDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDataStore.swift; sourceTree = "<group>"; };
+		91D475F226D12A6A00CBABF4 /* TVDBError+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TVDBError+Identifiable.swift"; sourceTree = "<group>"; };
+		91D475F426D12ACB00CBABF4 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
+		91D475F626D2F15F00CBABF4 /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
+		91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchableEpisode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91D475FE26D2FA7800CBABF4 /* SwiftUIRefresh in Frameworks */,
 				91D475E726CF1BE800CBABF4 /* TVDBKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				91B8023124BC598800C4BC31 /* AppDelegate.swift */,
-				91B8025324BCD5FA00C4BC31 /* Show.swift */,
 				91B8025524BCD80800C4BC31 /* State.swift */,
 				91B8025D24BE2EE400C4BC31 /* Episode.swift */,
 				91B8023324BC598800C4BC31 /* SceneDelegate.swift */,
@@ -123,7 +133,6 @@
 				91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */,
 				91B8025124BCD03300C4BC31 /* SelectViewCell.xib */,
 				91B8025924BE274A00C4BC31 /* NextViewCell.xib */,
-				91B8023D24BC598F00C4BC31 /* Assets.xcassets */,
 				91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */,
 				91B8024224BC598F00C4BC31 /* Info.plist */,
 				91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */,
@@ -136,11 +145,18 @@
 			children = (
 				91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */,
 				91D475E326CF1B8A00CBABF4 /* EpisodeListView.swift */,
+				91D475F426D12ACB00CBABF4 /* EpisodeView.swift */,
+				91D475EE26D1299300CBABF4 /* ShowFilterList.swift */,
+				91D475F226D12A6A00CBABF4 /* TVDBError+Identifiable.swift */,
+				91D475F026D12A2E00CBABF4 /* ShowDataStore.swift */,
+				91D475F626D2F15F00CBABF4 /* UpNextView.swift */,
 				91D475EC26CFED5D00CBABF4 /* Constants.swift */,
-				91D475D226CD11A200CBABF4 /* ContentView.swift */,
 				91D475D926CD11A300CBABF4 /* Persistence.swift */,
+				91B8025324BCD5FA00C4BC31 /* Show.swift */,
 				91D475DE26CD11A300CBABF4 /* Info.plist */,
 				91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld */,
+				91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */,
+				91B8023D24BC598F00C4BC31 /* Assets.xcassets */,
 				91D475D626CD11A300CBABF4 /* Preview Content */,
 			);
 			path = "Arrowverse Watchlist 2";
@@ -192,6 +208,7 @@
 			name = "Arrowverse Watchlist 2";
 			packageProductDependencies = (
 				91D475E626CF1BE800CBABF4 /* TVDBKit */,
+				91D475FD26D2FA7800CBABF4 /* SwiftUIRefresh */,
 			);
 			productName = "Arrowverse Watchlist 2";
 			productReference = 91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist 2.app */;
@@ -227,6 +244,7 @@
 			packageReferences = (
 				91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				91D475E526CF1BE800CBABF4 /* XCRemoteSwiftPackageReference "TVDBKit" */,
+				91D475FC26D2FA7800CBABF4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = 91B8022F24BC598800C4BC31 /* Products */;
 			projectDirPath = "";
@@ -268,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B8025424BCD5FA00C4BC31 /* Show.swift in Sources */,
 				91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */,
 				91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */,
 				91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */,
@@ -288,10 +305,15 @@
 			files = (
 				91D475EB26CF9F9100CBABF4 /* Show.swift in Sources */,
 				91D475DA26CD11A300CBABF4 /* Persistence.swift in Sources */,
-				91D475D326CD11A200CBABF4 /* ContentView.swift in Sources */,
+				91D475F726D2F15F00CBABF4 /* UpNextView.swift in Sources */,
+				91D475EF26D1299300CBABF4 /* ShowFilterList.swift in Sources */,
+				91D475F526D12ACB00CBABF4 /* EpisodeView.swift in Sources */,
 				91D475E426CF1B8A00CBABF4 /* EpisodeListView.swift in Sources */,
+				91D475F126D12A2E00CBABF4 /* ShowDataStore.swift in Sources */,
+				91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */,
 				91D475ED26CFED5D00CBABF4 /* Constants.swift in Sources */,
 				91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld in Sources */,
+				91D475F326D12A6A00CBABF4 /* TVDBError+Identifiable.swift in Sources */,
 				91D475D126CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,6 +591,14 @@
 				kind = branch;
 			};
 		};
+		91D475FC26D2FA7800CBABF4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUIRefresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -581,6 +611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 91D475E526CF1BE800CBABF4 /* XCRemoteSwiftPackageReference "TVDBKit" */;
 			productName = TVDBKit;
+		};
+		91D475FD26D2FA7800CBABF4 /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91D475FC26D2FA7800CBABF4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
 
