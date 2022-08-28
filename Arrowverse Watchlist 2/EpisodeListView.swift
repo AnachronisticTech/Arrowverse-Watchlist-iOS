@@ -1,6 +1,6 @@
 //
 //  EpisodeListView.swift
-//  Arrowverse Watchlist 2
+//  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 20/08/2021.
 //  Copyright © 2021 Daniel Marriner. All rights reserved.

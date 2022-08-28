@@ -1,6 +1,6 @@
 //
-//  Arrowverse_Watchlist_2App.swift
-//  Arrowverse Watchlist 2
+//  ArrowverseWatchlistApp.swift
+//  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 18/08/2021.
 //  Copyright © 2021 Daniel Marriner. All rights reserved.
@@ -10,7 +10,7 @@ import SwiftUI
 import TVDBKit
 
 @main
-struct Arrowverse_Watchlist_2App: App {
+struct ArrowverseWatchlistApp: App {
     let persistenceController = PersistenceController.shared
     let showDataStore = ShowDataStore.shared
 

@@ -1,6 +1,6 @@
 //
-//  WatchableEpisode+CoreDataProperties.swift
-//  Arrowverse Watchlist 2
+//  WatchableEpisode.swift
+//  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 23/08/2021.
 //  Copyright © 2021 Daniel Marriner. All rights reserved.

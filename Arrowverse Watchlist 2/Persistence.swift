@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Arrowverse Watchlist 2
+//  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 18/08/2021.
 //  Copyright © 2021 Daniel Marriner. All rights reserved.
@@ -32,7 +32,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Arrowverse_Watchlist_2")
+        container = NSPersistentContainer(name: "Arrowverse_Watchlist")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

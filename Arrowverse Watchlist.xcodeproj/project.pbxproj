@@ -7,27 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		91B8023224BC598800C4BC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023124BC598800C4BC31 /* AppDelegate.swift */; };
-		91B8023424BC598800C4BC31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023324BC598800C4BC31 /* SceneDelegate.swift */; };
-		91B8023624BC598800C4BC31 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023524BC598800C4BC31 /* ListViewController.swift */; };
-		91B8023924BC598800C4BC31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023724BC598800C4BC31 /* Main.storyboard */; };
-		91B8023C24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */; };
-		91B8023E24BC598F00C4BC31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023D24BC598F00C4BC31 /* Assets.xcassets */; };
-		91B8024124BC598F00C4BC31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */; };
-		91B8024A24BC5B4500C4BC31 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 91B8024924BC5B4500C4BC31 /* SwiftSoup */; };
-		91B8024C24BC8B0000C4BC31 /* ListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */; };
-		91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */; };
-		91B8025224BCD03300C4BC31 /* SelectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025124BCD03300C4BC31 /* SelectViewCell.xib */; };
-		91B8025624BCD80800C4BC31 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025524BCD80800C4BC31 /* State.swift */; };
-		91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025724BE204300C4BC31 /* NextViewController.swift */; };
-		91B8025A24BE274A00C4BC31 /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B8025924BE274A00C4BC31 /* NextViewCell.xib */; };
-		91B8025C24BE2E6900C4BC31 /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */; };
-		91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025D24BE2EE400C4BC31 /* Episode.swift */; };
-		91B8026024BE2FED00C4BC31 /* UserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B8025F24BE2FED00C4BC31 /* UserInterface.swift */; };
-		91D475D126CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */; };
+		91D475D126CD11A200CBABF4 /* ArrowverseWatchlistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D026CD11A200CBABF4 /* ArrowverseWatchlistApp.swift */; };
 		91D475D826CD11A300CBABF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91D475D726CD11A300CBABF4 /* Preview Assets.xcassets */; };
 		91D475DA26CD11A300CBABF4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D926CD11A300CBABF4 /* Persistence.swift */; };
-		91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld */; };
+		91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld */; };
 		91D475E226CD11C400CBABF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91B8023D24BC598F00C4BC31 /* Assets.xcassets */; };
 		91D475E426CF1B8A00CBABF4 /* EpisodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475E326CF1B8A00CBABF4 /* EpisodeListView.swift */; };
 		91D475E726CF1BE800CBABF4 /* TVDBKit in Frameworks */ = {isa = PBXBuildFile; productRef = 91D475E626CF1BE800CBABF4 /* TVDBKit */; };
@@ -43,27 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		91B8022E24BC598800C4BC31 /* Arrowverse Watchlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91B8023124BC598800C4BC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		91B8023324BC598800C4BC31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		91B8023524BC598800C4BC31 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		91B8023824BC598800C4BC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		91B8023B24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Arrowverse_Watchlist.xcdatamodel; sourceTree = "<group>"; };
 		91B8023D24BC598F00C4BC31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		91B8024024BC598F00C4BC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		91B8024224BC598F00C4BC31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewCell.xib; sourceTree = "<group>"; };
-		91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
-		91B8025124BCD03300C4BC31 /* SelectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectViewCell.xib; sourceTree = "<group>"; };
 		91B8025324BCD5FA00C4BC31 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		91B8025524BCD80800C4BC31 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		91B8025724BE204300C4BC31 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
-		91B8025924BE274A00C4BC31 /* NextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextViewCell.xib; sourceTree = "<group>"; };
-		91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
-		91B8025D24BE2EE400C4BC31 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
-		91B8025F24BE2FED00C4BC31 /* UserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterface.swift; sourceTree = "<group>"; };
-		91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrowverse_Watchlist_2App.swift; sourceTree = "<group>"; };
+		91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91D475D026CD11A200CBABF4 /* ArrowverseWatchlistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowverseWatchlistApp.swift; sourceTree = "<group>"; };
 		91D475D726CD11A300CBABF4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		91D475D926CD11A300CBABF4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		91D475DC26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Arrowverse_Watchlist_2.xcdatamodel; sourceTree = "<group>"; };
@@ -79,14 +45,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		91B8022B24BC598800C4BC31 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91B8024A24BC5B4500C4BC31 /* SwiftSoup in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		91D475CB26CD11A200CBABF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -102,7 +60,6 @@
 		91B8022524BC598800C4BC31 = {
 			isa = PBXGroup;
 			children = (
-				91B8023024BC598800C4BC31 /* Arrowverse Watchlist */,
 				91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist 2 */,
 				91B8022F24BC598800C4BC31 /* Products */,
 			);
@@ -111,39 +68,15 @@
 		91B8022F24BC598800C4BC31 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				91B8022E24BC598800C4BC31 /* Arrowverse Watchlist.app */,
-				91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist 2.app */,
+				91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		91B8023024BC598800C4BC31 /* Arrowverse Watchlist */ = {
-			isa = PBXGroup;
-			children = (
-				91B8023124BC598800C4BC31 /* AppDelegate.swift */,
-				91B8025524BCD80800C4BC31 /* State.swift */,
-				91B8025D24BE2EE400C4BC31 /* Episode.swift */,
-				91B8023324BC598800C4BC31 /* SceneDelegate.swift */,
-				91B8025F24BE2FED00C4BC31 /* UserInterface.swift */,
-				91B8025B24BE2E6900C4BC31 /* CoreDataFunctions.swift */,
-				91B8023524BC598800C4BC31 /* ListViewController.swift */,
-				91B8024F24BCCF8300C4BC31 /* SelectViewController.swift */,
-				91B8025724BE204300C4BC31 /* NextViewController.swift */,
-				91B8023724BC598800C4BC31 /* Main.storyboard */,
-				91B8024B24BC8B0000C4BC31 /* ListViewCell.xib */,
-				91B8025124BCD03300C4BC31 /* SelectViewCell.xib */,
-				91B8025924BE274A00C4BC31 /* NextViewCell.xib */,
-				91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */,
-				91B8024224BC598F00C4BC31 /* Info.plist */,
-				91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */,
-			);
-			path = "Arrowverse Watchlist";
 			sourceTree = "<group>";
 		};
 		91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist 2 */ = {
 			isa = PBXGroup;
 			children = (
-				91D475D026CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift */,
+				91D475D026CD11A200CBABF4 /* ArrowverseWatchlistApp.swift */,
 				91D475E326CF1B8A00CBABF4 /* EpisodeListView.swift */,
 				91D475F426D12ACB00CBABF4 /* EpisodeView.swift */,
 				91D475EE26D1299300CBABF4 /* ShowFilterList.swift */,
@@ -154,7 +87,7 @@
 				91D475D926CD11A300CBABF4 /* Persistence.swift */,
 				91B8025324BCD5FA00C4BC31 /* Show.swift */,
 				91D475DE26CD11A300CBABF4 /* Info.plist */,
-				91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld */,
+				91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld */,
 				91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */,
 				91B8023D24BC598F00C4BC31 /* Assets.xcassets */,
 				91D475D626CD11A300CBABF4 /* Preview Content */,
@@ -173,29 +106,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		91B8022D24BC598800C4BC31 /* Arrowverse Watchlist */ = {
+		91D475CD26CD11A200CBABF4 /* Arrowverse Watchlist */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 91B8024524BC598F00C4BC31 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist" */;
-			buildPhases = (
-				91B8022A24BC598800C4BC31 /* Sources */,
-				91B8022B24BC598800C4BC31 /* Frameworks */,
-				91B8022C24BC598800C4BC31 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Arrowverse Watchlist";
-			packageProductDependencies = (
-				91B8024924BC5B4500C4BC31 /* SwiftSoup */,
-			);
-			productName = "Arrowverse Watchlist";
-			productReference = 91B8022E24BC598800C4BC31 /* Arrowverse Watchlist.app */;
-			productType = "com.apple.product-type.application";
-		};
-		91D475CD26CD11A200CBABF4 /* Arrowverse Watchlist 2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 91D475E126CD11A300CBABF4 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist 2" */;
+			buildConfigurationList = 91D475E126CD11A300CBABF4 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist" */;
 			buildPhases = (
 				91D475CA26CD11A200CBABF4 /* Sources */,
 				91D475CB26CD11A200CBABF4 /* Frameworks */,
@@ -205,13 +118,13 @@
 			);
 			dependencies = (
 			);
-			name = "Arrowverse Watchlist 2";
+			name = "Arrowverse Watchlist";
 			packageProductDependencies = (
 				91D475E626CF1BE800CBABF4 /* TVDBKit */,
 				91D475FD26D2FA7800CBABF4 /* SwiftUIRefresh */,
 			);
 			productName = "Arrowverse Watchlist 2";
-			productReference = 91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist 2.app */;
+			productReference = 91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -224,9 +137,6 @@
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Daniel Marriner";
 				TargetAttributes = {
-					91B8022D24BC598800C4BC31 = {
-						CreatedOnToolsVersion = 11.5;
-					};
 					91D475CD26CD11A200CBABF4 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -250,26 +160,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				91B8022D24BC598800C4BC31 /* Arrowverse Watchlist */,
-				91D475CD26CD11A200CBABF4 /* Arrowverse Watchlist 2 */,
+				91D475CD26CD11A200CBABF4 /* Arrowverse Watchlist */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		91B8022C24BC598800C4BC31 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91B8024C24BC8B0000C4BC31 /* ListViewCell.xib in Resources */,
-				91B8024124BC598F00C4BC31 /* LaunchScreen.storyboard in Resources */,
-				91B8023E24BC598F00C4BC31 /* Assets.xcassets in Resources */,
-				91B8025224BCD03300C4BC31 /* SelectViewCell.xib in Resources */,
-				91B8023924BC598800C4BC31 /* Main.storyboard in Resources */,
-				91B8025A24BE274A00C4BC31 /* NextViewCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		91D475CC26CD11A200CBABF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,23 +178,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		91B8022A24BC598800C4BC31 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91B8025824BE204400C4BC31 /* NextViewController.swift in Sources */,
-				91B8025024BCCF8300C4BC31 /* SelectViewController.swift in Sources */,
-				91B8025E24BE2EE400C4BC31 /* Episode.swift in Sources */,
-				91B8023624BC598800C4BC31 /* ListViewController.swift in Sources */,
-				91B8023C24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld in Sources */,
-				91B8023224BC598800C4BC31 /* AppDelegate.swift in Sources */,
-				91B8025C24BE2E6900C4BC31 /* CoreDataFunctions.swift in Sources */,
-				91B8025624BCD80800C4BC31 /* State.swift in Sources */,
-				91B8023424BC598800C4BC31 /* SceneDelegate.swift in Sources */,
-				91B8026024BE2FED00C4BC31 /* UserInterface.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		91D475CA26CD11A200CBABF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,32 +191,13 @@
 				91D475F126D12A2E00CBABF4 /* ShowDataStore.swift in Sources */,
 				91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */,
 				91D475ED26CFED5D00CBABF4 /* Constants.swift in Sources */,
-				91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld in Sources */,
+				91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld in Sources */,
 				91D475F326D12A6A00CBABF4 /* TVDBError+Identifiable.swift in Sources */,
-				91D475D126CD11A200CBABF4 /* Arrowverse_Watchlist_2App.swift in Sources */,
+				91D475D126CD11A200CBABF4 /* ArrowverseWatchlistApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		91B8023724BC598800C4BC31 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91B8023824BC598800C4BC31 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		91B8023F24BC598F00C4BC31 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91B8024024BC598F00C4BC31 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		91B8024324BC598F00C4BC31 /* Debug */ = {
@@ -456,48 +316,6 @@
 			};
 			name = Release;
 		};
-		91B8024624BC598F00C4BC31 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: Daniel Marriner (NG658FP64Q)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = SDPTWQFVDC;
-				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "anachronistic-tech.Arrowverse-Watchlist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ArrowDevelopmentProfile;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		91B8024724BC598F00C4BC31 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: Daniel Marriner (NG658FP64Q)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = SDPTWQFVDC;
-				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "anachronistic-tech.Arrowverse-Watchlist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ArrowDevelopmentProfile;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		91D475DF26CD11A300CBABF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -554,16 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		91B8024524BC598F00C4BC31 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				91B8024624BC598F00C4BC31 /* Debug */,
-				91B8024724BC598F00C4BC31 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		91D475E126CD11A300CBABF4 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist 2" */ = {
+		91D475E126CD11A300CBABF4 /* Build configuration list for PBXNativeTarget "Arrowverse Watchlist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				91D475DF26CD11A300CBABF4 /* Debug */,
@@ -602,11 +411,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		91B8024924BC5B4500C4BC31 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
 		91D475E626CF1BE800CBABF4 /* TVDBKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 91D475E526CF1BE800CBABF4 /* XCRemoteSwiftPackageReference "TVDBKit" */;
@@ -620,23 +424,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		91B8023A24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				91B8023B24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodel */,
-			);
-			currentVersion = 91B8023B24BC598800C4BC31 /* Arrowverse_Watchlist.xcdatamodel */;
-			path = Arrowverse_Watchlist.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodeld */ = {
+		91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				91D475DC26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodel */,
 			);
 			currentVersion = 91D475DC26CD11A300CBABF4 /* Arrowverse_Watchlist_2.xcdatamodel */;
-			path = Arrowverse_Watchlist_2.xcdatamodeld;
+			path = Arrowverse_Watchlist.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
