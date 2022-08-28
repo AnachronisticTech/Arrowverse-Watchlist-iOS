@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		915A8C5A28BB652000531810 /* ShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915A8C5928BB652000531810 /* ShowsView.swift */; };
+		915A8C5C28BB654300531810 /* Content.json in Resources */ = {isa = PBXBuildFile; fileRef = 915A8C5B28BB654300531810 /* Content.json */; };
 		91D475D126CD11A200CBABF4 /* ArrowverseWatchlistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D026CD11A200CBABF4 /* ArrowverseWatchlistApp.swift */; };
 		91D475D826CD11A300CBABF4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91D475D726CD11A300CBABF4 /* Preview Assets.xcassets */; };
 		91D475DA26CD11A300CBABF4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475D926CD11A300CBABF4 /* Persistence.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		915A8C5928BB652000531810 /* ShowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsView.swift; sourceTree = "<group>"; };
+		915A8C5B28BB654300531810 /* Content.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Content.json; sourceTree = "<group>"; };
 		91B8023D24BC598F00C4BC31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91B8025324BCD5FA00C4BC31 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		91D475CE26CD11A200CBABF4 /* Arrowverse Watchlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arrowverse Watchlist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,8 @@
 				91D475EC26CFED5D00CBABF4 /* Constants.swift */,
 				91D475D926CD11A300CBABF4 /* Persistence.swift */,
 				91B8025324BCD5FA00C4BC31 /* Show.swift */,
+				915A8C5928BB652000531810 /* ShowsView.swift */,
+				915A8C5B28BB654300531810 /* Content.json */,
 				91D475DE26CD11A300CBABF4 /* Info.plist */,
 				91D475DB26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld */,
 				91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */,
@@ -171,6 +177,7 @@
 			files = (
 				91D475D826CD11A300CBABF4 /* Preview Assets.xcassets in Resources */,
 				91D475E226CD11C400CBABF4 /* Assets.xcassets in Resources */,
+				915A8C5C28BB654300531810 /* Content.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +198,7 @@
 				91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */,
 				91D475ED26CFED5D00CBABF4 /* Constants.swift in Sources */,
 				91D475DD26CD11A300CBABF4 /* Arrowverse_Watchlist.xcdatamodeld in Sources */,
+				915A8C5A28BB652000531810 /* ShowsView.swift in Sources */,
 				91D475F326D12A6A00CBABF4 /* TVDBError+Identifiable.swift in Sources */,
 				91D475D126CD11A200CBABF4 /* ArrowverseWatchlistApp.swift in Sources */,
 			);

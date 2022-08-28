@@ -8,11 +8,54 @@
 
 import UIKit
 
+struct Config: Codable {
+    let groupings: [ShowGrouping]
+    let shows: [ShowData]
+}
+
+struct ShowGrouping: Codable, Identifiable {
+    let id: Int
+    let name: String
+    let icon: String
+    let color: ShowColor
+
+    var image: UIImage? {
+        if let data = Data(base64Encoded: icon, options: .ignoreUnknownCharacters) {
+            return UIImage(data: data)
+        }
+
+        return nil
+    }
+}
+
+struct ShowData: Codable, Identifiable {
+    let id: Int
+    let groupId: Int
+    let name: String
+    let shortName: String
+    let icon: String
+    let color: ShowColor
+
+    var image: UIImage? {
+        if let data = Data(base64Encoded: icon, options: .ignoreUnknownCharacters) {
+            return UIImage(data: data)
+        }
+
+        return nil
+    }
+}
+
+struct ShowColor: Codable {
+    let r: Int
+    let g: Int
+    let b: Int
+}
+
 public enum Show: String, CaseIterable, Codable {
     case Arrow, Constantine, Flash, Legends
     case Supergirl, Vixen, BlackLightning, Batwoman
     case Titans, DoomPatrol, Stargirl, Superman
-    
+
     var name: String {
         switch self {
             case .Arrow: return "Arrow"
@@ -29,7 +72,7 @@ public enum Show: String, CaseIterable, Codable {
             case .Superman: return "Superman & Lois"
         }
     }
-    
+
     var shortName: String {
         switch self {
             case .Arrow: return "ARR"
@@ -63,7 +106,7 @@ public enum Show: String, CaseIterable, Codable {
             case .Superman: return 95057
         }
     }
-    
+
     private var constantName: String {
         switch self {
             case .Arrow: return "arrow"
@@ -80,42 +123,12 @@ public enum Show: String, CaseIterable, Codable {
             case .Superman: return "superman"
         }
     }
-    
+
     var color: UIColor {
         return UIColor(named: constantName)!
     }
-    
+
     var icon: UIImage {
         return UIImage(named: constantName)!
-    }
-    
-    private var baseURL: String {
-        return isFromWikipedia ? "https://en.wikipedia.org/wiki/" : "https://arrow.fandom.com/wiki/"
-    }
-    
-    private var episodeListURL: String {
-        switch self {
-            case .Arrow: return "List_of_Arrow_episodes"
-            case .Constantine: return "List_of_Constantine_episodes"
-            case .Flash: return "List_of_The_Flash_(The_CW)_episodes"
-            case .Legends: return "List_of_DC's_Legends_of_Tomorrow_episodes"
-            case .Supergirl: return "List_of_Supergirl_episodes"
-            case .Vixen: return "List_of_Vixen_episodes"
-            case .BlackLightning: return "List_of_Black_Lightning_episodes"
-            case .Batwoman: return "List_of_Batwoman_episodes"
-            case .Titans: return "Titans_(2018_TV_series)"
-            case .DoomPatrol: return "Doom_Patrol_(TV_series)"
-            case .Stargirl: return "Stargirl_(TV_series)"
-            case .Superman: return "List_of_Superman_&_Lois_episodes"
-        }
-    }
-    
-    var url: URL {
-        return URL(string: "\(baseURL)\(episodeListURL)")!
-    }
-    
-    var isFromWikipedia: Bool {
-        let shows: [Show] = [.BlackLightning, .Titans, .DoomPatrol, .Stargirl]
-        return shows.contains(self)
     }
 }

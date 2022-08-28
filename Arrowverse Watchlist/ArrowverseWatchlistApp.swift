@@ -20,6 +20,7 @@ struct ArrowverseWatchlistApp: App {
 
     var body: some Scene {
         WindowGroup {
+//            ShowsView()
             EpisodeListView()
                 .environmentObject(showDataStore)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
