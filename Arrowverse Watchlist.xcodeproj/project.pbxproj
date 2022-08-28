@@ -60,7 +60,7 @@
 		91B8022524BC598800C4BC31 = {
 			isa = PBXGroup;
 			children = (
-				91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist 2 */,
+				91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist */,
 				91B8022F24BC598800C4BC31 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist 2 */ = {
+		91D475CF26CD11A200CBABF4 /* Arrowverse Watchlist */ = {
 			isa = PBXGroup;
 			children = (
 				91D475D026CD11A200CBABF4 /* ArrowverseWatchlistApp.swift */,
@@ -92,7 +92,7 @@
 				91B8023D24BC598F00C4BC31 /* Assets.xcassets */,
 				91D475D626CD11A300CBABF4 /* Preview Content */,
 			);
-			path = "Arrowverse Watchlist 2";
+			path = "Arrowverse Watchlist";
 			sourceTree = "<group>";
 		};
 		91D475D626CD11A300CBABF4 /* Preview Content */ = {
@@ -152,7 +152,6 @@
 			);
 			mainGroup = 91B8022524BC598800C4BC31;
 			packageReferences = (
-				91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				91D475E526CF1BE800CBABF4 /* XCRemoteSwiftPackageReference "TVDBKit" */,
 				91D475FC26D2FA7800CBABF4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
@@ -322,10 +321,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Arrowverse Watchlist 2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Arrowverse\\ Watchlist/Preview\\ Content";
 				DEVELOPMENT_TEAM = SDPTWQFVDC;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Arrowverse Watchlist 2/Info.plist";
+				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -344,10 +343,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Arrowverse Watchlist 2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Arrowverse\\ Watchlist/Preview\\ Content";
 				DEVELOPMENT_TEAM = SDPTWQFVDC;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Arrowverse Watchlist 2/Info.plist";
+				INFOPLIST_FILE = "Arrowverse Watchlist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -384,14 +383,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		91B8024824BC5B4500C4BC31 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.2;
-			};
-		};
 		91D475E526CF1BE800CBABF4 /* XCRemoteSwiftPackageReference "TVDBKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AnachronisticTech/TVDBKit.git";

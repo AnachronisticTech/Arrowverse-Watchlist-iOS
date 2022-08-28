@@ -102,7 +102,10 @@ class ShowDataStore: ObservableObject {
                 latest.append(episode)
             }
         }
-        latestEpisodes = latest.sorted(by: { ($0.airDate, $0.episodeNumber) < ($1.airDate, $1.episodeNumber) })
+
+        DispatchQueue.main.async {
+            self.latestEpisodes = latest.sorted(by: { ($0.airDate, $0.episodeNumber) < ($1.airDate, $1.episodeNumber) })
+        }
     }
 
     func loadEpisodes() {
