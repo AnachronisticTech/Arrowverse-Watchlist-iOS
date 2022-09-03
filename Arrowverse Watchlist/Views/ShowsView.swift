@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ShowsView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
 
     let columns: [GridItem] = [GridItem(), GridItem()]
@@ -18,7 +20,9 @@ struct ShowsView: View {
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
                     ForEach(config.groupings) { group in
-                        NavigationLink(destination: Text(group.name)) {
+                        NavigationLink {
+                            EpisodeListView(groupManager: GroupManager(config, group.id))
+                        } label: {
                             viewFor(group)
                         }
                     }
@@ -27,20 +31,13 @@ struct ShowsView: View {
             }
             .navigationTitle("Groups")
         }
+        .navigationViewStyle(.stack)
     }
 
-    func viewFor(_ group: ShowGrouping) -> some View {
+    func viewFor(_ group: ShowGroup) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(
-                    Color(
-                        .sRGB,
-                        red: Double(group.color.r)/255.0,
-                        green: Double(group.color.g)/255.0,
-                        blue: Double(group.color.b)/255.0,
-                        opacity: 1
-                    )
-                )
+                .foregroundColor(Color(group.color.cgColor))
                 .frame(height: 100)
 
                     if let image = group.image {

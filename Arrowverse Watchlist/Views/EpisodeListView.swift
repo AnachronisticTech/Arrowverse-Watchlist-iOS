@@ -11,7 +11,7 @@ import CoreData
 import TVDBKit
 import SwiftUIRefresh
 
-struct EpisodeListView_New: View {
+struct EpisodeListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @State private var isShowingError: TVDBError?
@@ -24,7 +24,7 @@ struct EpisodeListView_New: View {
     var body: some View {
         List {
             ForEach(groupManager.episodes) { episode in
-                EpisodeView(episode: episode, show: groupManager.show(for: episode))
+                EpisodeView(episode: episode, show: groupManager.show(for: episode)!)
                     .onTapGesture {
                         if episode.airDate < Date(timeIntervalSinceNow: 0) {
                             groupManager.toggleWatchedStatus(for: episode)
@@ -62,10 +62,10 @@ struct EpisodeListView_New: View {
             )
         }
         .sheet(isPresented: $isShowingFilterSheet) {
-            ShowFilterList()
+            ShowFilterView(groupManager: groupManager)
         }
         .sheet(isPresented: $isShowingUpNextSheet) {
-            UpNextView()
+            UpNextView(groupManager: groupManager)
         }
     }
 }
@@ -74,6 +74,6 @@ struct EpisodeListView_New_Previews: PreviewProvider {
     static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
 
     static var previews: some View {
-        EpisodeListView_New(groupManager: GroupManager(config, 0))
+        EpisodeListView(groupManager: GroupManager(config, 0))
     }
 }

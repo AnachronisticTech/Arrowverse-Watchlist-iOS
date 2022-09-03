@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct UpNextView: View {
-    @EnvironmentObject var showDataStore: ShowDataStore
+    @StateObject var groupManager: GroupManager
 
     var body: some View {
         ScrollView {
@@ -17,28 +17,28 @@ struct UpNextView: View {
                 Text("Up Next")
                     .font(.title)
                     .padding([.top])
-                ForEach(showDataStore.latestEpisodes.filter({ $0.airDate < Date(timeIntervalSinceNow: 0) })) { episode in
+                ForEach(groupManager.latestEpisodes.filter({ $0.airDate < Date(timeIntervalSinceNow: 0) })) { episode in
                     HStack {
-                        EpisodeView(episode: episode)
+                        EpisodeView(episode: episode, show: groupManager.show(for: episode)!)
                             .padding(10)
                     }
-                    .background(showDataStore.trackedShows.contains(episode.show) ? Color(episode.show.color.cgColor) : Color.gray)
+                    .background(groupManager.trackedShows.contains(groupManager.show(for: episode)!) ? Color(groupManager.show(for: episode)!.color.cgColor) : Color.gray)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding([.leading, .bottom, .trailing], 5)
                     .onTapGesture {
-                        showDataStore.toggleWatchedStatus(for: episode)
+                        groupManager.toggleWatchedStatus(for: episode)
                     }
                 }
 
                 Text("Coming Soon")
                     .font(.title)
                     .padding([.top])
-                ForEach(showDataStore.latestEpisodes.filter({ $0.airDate > Date(timeIntervalSinceNow: 0) })) { episode in
+                ForEach(groupManager.latestEpisodes.filter({ $0.airDate > Date(timeIntervalSinceNow: 0) })) { episode in
                     HStack {
-                        EpisodeView(episode: episode)
+                        EpisodeView(episode: episode, show: groupManager.show(for: episode)!)
                             .padding(10)
                     }
-                    .background(showDataStore.trackedShows.contains(episode.show) ? Color(episode.show.color.cgColor) : Color.gray)
+                    .background(groupManager.trackedShows.contains(groupManager.show(for: episode)!) ? Color(groupManager.show(for: episode)!.color.cgColor) : Color.gray)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding([.leading, .bottom, .trailing], 5)
                 }
@@ -49,8 +49,9 @@ struct UpNextView: View {
 }
 
 struct UpNextView_Previews: PreviewProvider {
+    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
+
     static var previews: some View {
-        UpNextView()
-            .environmentObject(ShowDataStore.shared)
+        UpNextView(groupManager: GroupManager(config, 0))
     }
 }

@@ -11,21 +11,11 @@ import TVDBKit
 
 struct EpisodeView: View {
     @ObservedObject var episode: WatchableEpisode
-    let show: ShowData?
-
-    init(episode: WatchableEpisode) {
-        self.episode = episode
-        show = nil
-    }
-
-    init(episode: WatchableEpisode, show: ShowData?) {
-        self.episode = episode
-        self.show = show
-    }
+    let show: Show
 
     var body: some View {
         HStack {
-            if let image = show?.image {
+            if let image = show.image {
                 HStack {
                     Image(uiImage: image)
                         .resizable()
@@ -38,7 +28,7 @@ struct EpisodeView: View {
             VStack(alignment: .leading) {
                 Text(episode.name)
                 HStack {
-                    Text("\(show?.name ?? "") \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
+                    Text("\(show.name) \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
                         Text(Utils.dateFormatter.string(from: episode.airDate))
                 }
                 .font(.caption)
@@ -47,6 +37,6 @@ struct EpisodeView: View {
             Spacer()
         }
         .contentShape(Rectangle())
-        .listRowBackground(episode.watched ? Color.gray : show != nil ? Color(show!.color.cgColor) : .black)
+        .listRowBackground(episode.watched ? Color.gray : Color(show.color.cgColor))
     }
 }

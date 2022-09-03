@@ -24,9 +24,4 @@ public class WatchableEpisode: NSManagedObject, Identifiable {
     @NSManaged public var episodeNumber: Int64
     @NSManaged public var seasonNumber: Int64
     @NSManaged public var showId: Int
-
-    public var show: Show {
-        get { Show(rawValue: rawShow)! }
-        set { rawShow = newValue.rawValue }
-    }
 }

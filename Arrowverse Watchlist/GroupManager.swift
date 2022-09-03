@@ -14,14 +14,14 @@ import TVDBKit
 class GroupManager: ObservableObject {
     private static var persistenceController = PersistenceController.shared
 
-    let groupData: ShowGrouping
+    let groupData: ShowGroup
 
-    private let shows: [ShowData]
-    @Published var episodes = [WatchableEpisode]()
-    @Published var latestEpisodes = [WatchableEpisode]()
-    @Published var trackedShows = [ShowData]()
+    let shows: [Show]
+    @Published public private(set) var episodes = [WatchableEpisode]()
+    @Published public private(set) var latestEpisodes = [WatchableEpisode]()
+    @Published public private(set) var trackedShows = Set<Show>()
 
-    @Published var isRequestInProgress = false
+    @Published public private(set) var isRequestInProgress = false
     private var requestsInProgress = 0 {
         didSet {
             isRequestInProgress = requestsInProgress > 0
@@ -40,20 +40,20 @@ class GroupManager: ObservableObject {
         )
 
         if
-            let data = UserDefaults.standard.data(forKey: "tracked_show_ids"),
+            let data = UserDefaults.standard.data(forKey: "tracked_show_ids_\(groupId)"),
             let showIds = try? JSONDecoder().decode([Int].self, from: data)
         {
-            trackedShows = shows.filter { showIds.contains($0.id) }
+            trackedShows = Set(shows.filter { showIds.contains($0.id) })
         } else {
-            trackedShows = shows
+            trackedShows = Set(shows)
             UserDefaults.standard
-                .set(try? JSONEncoder().encode(shows.map({ $0.id })), forKey: "tracked_show_ids")
+                .set(try? JSONEncoder().encode(shows.map({ $0.id })), forKey: "tracked_show_ids_\(groupId)")
         }
 
         loadEpisodes()
     }
 
-    func show(for episode: WatchableEpisode) -> ShowData? {
+    func show(for episode: WatchableEpisode) -> Show? {
         shows.first(where: { $0.id == episode.showId })
     }
 
@@ -124,7 +124,7 @@ class GroupManager: ObservableObject {
         }
     }
 
-    func insertIntoDB(_ episodes: [Season.Episode], _ show: ShowData) {
+    private func insertIntoDB(_ episodes: [Season.Episode], _ show: Show) {
         GroupManager.persistenceController.container.performBackgroundTask { context in
             for episode in episodes {
                 let request = NSFetchRequest<WatchableEpisode>(entityName: "WatchableEpisode")
@@ -166,5 +166,16 @@ class GroupManager: ObservableObject {
             print("[ERROR] Unable to save watched state for episode with id \(episode.id): \(error)")
         }
         print("Watched state for episode \(episode.name): \(episode.watched)")
+    }
+
+    func toggleTrackedStatus(for show: Show) {
+        if trackedShows.contains(show) {
+            trackedShows.remove(show)
+        } else {
+            trackedShows.insert(show)
+        }
+
+        UserDefaults.standard
+            .set(try? JSONEncoder().encode(trackedShows.map { $0.id }), forKey: "tracked_show_ids_\(groupData.id)")
     }
 }
