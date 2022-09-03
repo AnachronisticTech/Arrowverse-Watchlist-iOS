@@ -11,23 +11,35 @@ import TVDBKit
 
 struct EpisodeView: View {
     @ObservedObject var episode: WatchableEpisode
+    let show: ShowData?
 
-    @EnvironmentObject var showDataStore: ShowDataStore
+    init(episode: WatchableEpisode) {
+        self.episode = episode
+        show = nil
+    }
+
+    init(episode: WatchableEpisode, show: ShowData?) {
+        self.episode = episode
+        self.show = show
+    }
 
     var body: some View {
         HStack {
-            HStack {
-                Image(uiImage: episode.show.icon)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 65, maxHeight: 65)
+            if let image = show?.image {
+                HStack {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 65, maxHeight: 65)
+                }
+                .frame(width: 65, height: 65, alignment: .center)
             }
-            .frame(width: 65, height: 65, alignment: .center)
+
             VStack(alignment: .leading) {
                 Text(episode.name)
                 HStack {
-                    Text("\(episode.show.name) \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
-                        Text(showDataStore.dateFormatter.string(from: episode.airDate))
+                    Text("\(show?.name ?? "") \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
+                        Text(Utils.dateFormatter.string(from: episode.airDate))
                 }
                 .font(.caption)
             }
@@ -35,6 +47,6 @@ struct EpisodeView: View {
             Spacer()
         }
         .contentShape(Rectangle())
-        .listRowBackground(episode.watched ? Color.gray : Color(episode.show.color.cgColor))
+        .listRowBackground(episode.watched ? Color.gray : show != nil ? Color(show!.color.cgColor) : .black)
     }
 }

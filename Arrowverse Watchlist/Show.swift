@@ -28,7 +28,7 @@ struct ShowGrouping: Codable, Identifiable {
     }
 }
 
-struct ShowData: Codable, Identifiable {
+struct ShowData: Codable, Identifiable, Equatable {
     let id: Int
     let groupId: Int
     let name: String
@@ -43,12 +43,25 @@ struct ShowData: Codable, Identifiable {
 
         return nil
     }
+
+    static func == (lhs: ShowData, rhs: ShowData) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct ShowColor: Codable {
     let r: Int
     let g: Int
     let b: Int
+
+    var cgColor: CGColor {
+        CGColor(
+            red: CGFloat(Double(r)/255.0),
+            green: CGFloat(Double(g)/255.0),
+            blue: CGFloat(Double(b)/255.0),
+            alpha: 1
+        )
+    }
 }
 
 public enum Show: String, CaseIterable, Codable {
