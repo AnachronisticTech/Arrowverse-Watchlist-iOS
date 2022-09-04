@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ShowsView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
     let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
 
     let columns: [GridItem] = [GridItem(), GridItem()]
@@ -21,9 +19,10 @@ struct ShowsView: View {
                 LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
                     ForEach(config.groupings) { group in
                         NavigationLink {
-                            EpisodeListView(groupManager: GroupManager(config, group.id))
+                            GroupMainView(groupManager: GroupManager(config, group.id))
+                                .navigationTitle(group.name)
                         } label: {
-                            viewFor(group)
+                            ShowGroupView(group: group)
                         }
                     }
                 }
@@ -32,37 +31,6 @@ struct ShowsView: View {
             .navigationTitle("Groups")
         }
         .navigationViewStyle(.stack)
-    }
-
-    func viewFor(_ group: ShowGroup) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(group.color.cgColor))
-                .frame(height: 100)
-
-                    if let image = group.image {
-                        HStack {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 65, maxHeight: 65)
-                            Spacer()
-                        }
-                        .padding()
-                    }
-
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text(group.name)
-                        .font(.title)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(.white)
-                }
-                .padding([.horizontal, .bottom])
-            }
-        }
     }
 }
 

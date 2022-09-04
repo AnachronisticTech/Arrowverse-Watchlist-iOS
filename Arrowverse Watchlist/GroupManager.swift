@@ -13,12 +13,9 @@ import TVDBKit
 
 class GroupManager: ObservableObject {
     private static var persistenceController = PersistenceController.shared
-
-    let groupData: ShowGroup
+    private let groupId: Int
 
     let shows: [Show]
-    @Published public private(set) var episodes = [WatchableEpisode]()
-    @Published public private(set) var latestEpisodes = [WatchableEpisode]()
     @Published public private(set) var trackedShows = Set<Show>()
 
     @Published public private(set) var isRequestInProgress = false
@@ -29,15 +26,8 @@ class GroupManager: ObservableObject {
     }
 
     init(_ config: Config, _ groupId: Int) {
-        groupData = config.groupings.first(where: { $0.id == groupId })!
+        self.groupId = groupId
         shows = config.shows.filter { $0.groupId == groupId }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didSaveContext),
-            name: .NSManagedObjectContextDidSave,
-            object: nil
-        )
 
         if
             let data = UserDefaults.standard.data(forKey: "tracked_show_ids_\(groupId)"),
@@ -49,15 +39,13 @@ class GroupManager: ObservableObject {
             UserDefaults.standard
                 .set(try? JSONEncoder().encode(shows.map({ $0.id })), forKey: "tracked_show_ids_\(groupId)")
         }
-
-        loadEpisodes()
     }
 
     func show(for episode: WatchableEpisode) -> Show? {
         shows.first(where: { $0.id == episode.showId })
     }
 
-    func fetch() {
+    func fetch(into context: NSManagedObjectContext) {
         for show in shows {
             requestsInProgress += 1
             TVDB.Convenience.getEpisodes(ofShowWithId: show.id) { result in
@@ -65,10 +53,10 @@ class GroupManager: ObservableObject {
                     case .failure(let error):
                         print(error)
                         if case .seasonDecodingError(_, let episodes) = error {
-                            self.insertIntoDB(episodes, show)
+                            self.insert(episodes, from: show, into: context)
                         }
                     case .success(let episodes):
-                        self.insertIntoDB(episodes, show)
+                        self.insert(episodes, from: show, into: context)
                 }
                 DispatchQueue.main.async {
                     self.requestsInProgress -= 1
@@ -77,54 +65,7 @@ class GroupManager: ObservableObject {
         }
     }
 
-    @objc func didSaveContext(_ notification: Notification) {
-        let request = WatchableEpisode.fetchRequest()
-        request.predicate = NSCompoundPredicate(type: .or, subpredicates: trackedShows.map({ NSPredicate(format: "showId == %ld", $0.id) }))
-
-        guard let results = try? GroupManager.persistenceController.container.viewContext.fetch(request) else { return }
-
-        if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject>, !insertedObjects.isEmpty {
-            episodes = results.sorted(by: Utils.episodeSorting)
-        }
-
-        var latest = [WatchableEpisode]()
-        for show in trackedShows {
-            if let episode = episodes
-                .filter({ $0.showId == show.id })
-                .filter({ !$0.watched })
-                .sorted(by: Utils.episodeSorting)
-                .first
-            {
-                latest.append(episode)
-            }
-        }
-
-        DispatchQueue.main.async {
-            self.latestEpisodes = latest.sorted(by: Utils.episodeSorting)
-        }
-    }
-
-    func loadEpisodes() {
-        let request = WatchableEpisode.fetchRequest()
-        request.predicate = NSCompoundPredicate(type: .or, subpredicates: trackedShows.map({ NSPredicate(format: "showId == %ld", $0.id) }))
-        if let results = try? GroupManager.persistenceController.container.viewContext.fetch(request) {
-            episodes = results.sorted(by: Utils.episodeSorting)
-            var latest = [WatchableEpisode]()
-            for show in trackedShows {
-                if let episode = episodes
-                    .filter({ $0.showId == show.id })
-                    .filter({ !$0.watched })
-                    .sorted(by: Utils.episodeSorting)
-                    .first
-                {
-                    latest.append(episode)
-                }
-            }
-            latestEpisodes = latest.sorted(by: Utils.episodeSorting)
-        }
-    }
-
-    private func insertIntoDB(_ episodes: [Season.Episode], _ show: Show) {
+    private func insert(_ episodes: [Season.Episode], from show: Show, into c: NSManagedObjectContext) {
         GroupManager.persistenceController.container.performBackgroundTask { context in
             for episode in episodes {
                 let request = NSFetchRequest<WatchableEpisode>(entityName: "WatchableEpisode")
@@ -157,17 +98,6 @@ class GroupManager: ObservableObject {
         }
     }
 
-    func toggleWatchedStatus(for episode: WatchableEpisode) {
-        let context = GroupManager.persistenceController.container.viewContext
-        episodes.first(where: { $0 == episode })?.watched.toggle()
-        do {
-            try context.save()
-        } catch {
-            print("[ERROR] Unable to save watched state for episode with id \(episode.id): \(error)")
-        }
-        print("Watched state for episode \(episode.name): \(episode.watched)")
-    }
-
     func toggleTrackedStatus(for show: Show) {
         if trackedShows.contains(show) {
             trackedShows.remove(show)
@@ -176,6 +106,6 @@ class GroupManager: ObservableObject {
         }
 
         UserDefaults.standard
-            .set(try? JSONEncoder().encode(trackedShows.map { $0.id }), forKey: "tracked_show_ids_\(groupData.id)")
+            .set(try? JSONEncoder().encode(trackedShows.map { $0.id }), forKey: "tracked_show_ids_\(groupId)")
     }
 }
