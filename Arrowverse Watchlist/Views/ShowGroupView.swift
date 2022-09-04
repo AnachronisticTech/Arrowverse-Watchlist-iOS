@@ -17,16 +17,16 @@ struct ShowGroupView: View {
                 .foregroundColor(Color(group.color.cgColor))
                 .frame(height: 100)
 
-                    if let image = group.image {
-                        HStack {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: 65, maxHeight: 65)
-                            Spacer()
-                        }
-                        .padding()
-                    }
+            if let image = group.image {
+                HStack {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 65, maxHeight: 65)
+                    Spacer()
+                }
+                .padding()
+            }
 
             VStack {
                 Spacer()

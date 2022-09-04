@@ -32,6 +32,7 @@
 		91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */; };
 		91D475FE26D2FA7800CBABF4 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 91D475FD26D2FA7800CBABF4 /* SwiftUIRefresh */; };
 		91DF85ED28C3A7AE00092740 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DF85EC28C3A7AE00092740 /* GroupManager.swift */; };
+		91F936B728C53CED00E76CF2 /* ColorConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F936B628C53CED00E76CF2 /* ColorConfigView.swift */; };
 		91F9AD8D28BBE42B0084CC1A /* EpisodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9AD8C28BBE42B0084CC1A /* EpisodeListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		91D475F626D2F15F00CBABF4 /* UpNextMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextMainView.swift; sourceTree = "<group>"; };
 		91D475F926D2F60F00CBABF4 /* WatchableEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchableEpisode.swift; sourceTree = "<group>"; };
 		91DF85EC28C3A7AE00092740 /* GroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
+		91F936B628C53CED00E76CF2 /* ColorConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConfigView.swift; sourceTree = "<group>"; };
 		91F9AD8C28BBE42B0084CC1A /* EpisodeListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				91F9AD8C28BBE42B0084CC1A /* EpisodeListView.swift */,
 				91D475F426D12ACB00CBABF4 /* EpisodeView.swift */,
 				91D475EE26D1299300CBABF4 /* ShowFilterView.swift */,
+				91F936B628C53CED00E76CF2 /* ColorConfigView.swift */,
 				91D475F626D2F15F00CBABF4 /* UpNextMainView.swift */,
 				91B3DDD328C4D185004D329A /* UpNextListView.swift */,
 			);
@@ -239,6 +242,7 @@
 				91B3DDD928C4DDC8004D329A /* ShowGroupView.swift in Sources */,
 				91BF875228C3C99200848565 /* ShowColor.swift in Sources */,
 				91D475EF26D1299300CBABF4 /* ShowFilterView.swift in Sources */,
+				91F936B728C53CED00E76CF2 /* ColorConfigView.swift in Sources */,
 				91D475F526D12ACB00CBABF4 /* EpisodeView.swift in Sources */,
 				91BF875428C3C9CF00848565 /* ShowGroup.swift in Sources */,
 				91D475FB26D2F60F00CBABF4 /* WatchableEpisode.swift in Sources */,

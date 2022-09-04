@@ -36,12 +36,16 @@ struct GroupMainView: View {
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button(action: { isShowingFilterSheet = true }) {
+                Button {
+                    isShowingFilterSheet = true
+                } label: {
                     Image(systemName: "line.horizontal.3.decrease.circle")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { isShowingUpNextSheet = true }) {
+                Button {
+                    isShowingUpNextSheet = true
+                } label: {
                     Image(systemName: "calendar")
                 }
             }
