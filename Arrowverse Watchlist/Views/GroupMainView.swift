@@ -8,12 +8,12 @@
 
 import SwiftUI
 import SwiftUIRefresh
-import TVDBKit
+import TheMovieDBKit
 
 struct GroupMainView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var isShowingError: TVDBError?
+    @State private var isShowingError: TheMovieDBError?
     @State private var isShowingFilterSheet = false
     @State private var isShowingUpNextSheet = false
     @State private var isShowingReloadIndicator = false

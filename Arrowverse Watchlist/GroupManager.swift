@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import CoreData
-import TVDBKit
+import TheMovieDBKit
 
 class GroupManager: ObservableObject {
     private static var persistenceController = PersistenceController.shared
@@ -48,7 +48,7 @@ class GroupManager: ObservableObject {
     func fetch(into context: NSManagedObjectContext) {
         for show in shows {
             requestsInProgress += 1
-            TVDB.Convenience.getEpisodes(ofShowWithId: show.id) { result in
+            TheMovieDB.Convenience.getEpisodes(ofShow: show.id) { result in
                 switch result {
                     case .failure(let error):
                         print(error)

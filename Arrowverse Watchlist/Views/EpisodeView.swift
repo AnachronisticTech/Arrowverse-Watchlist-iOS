@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import TVDBKit
 
 struct EpisodeView: View {
     @ObservedObject var episode: WatchableEpisode

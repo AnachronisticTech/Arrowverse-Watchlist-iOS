@@ -6,17 +6,18 @@
 //  Copyright © 2021 Daniel Marriner. All rights reserved.
 //
 
-import TVDBKit
+import TheMovieDBKit
 
-extension TVDBError: Identifiable {
+extension TheMovieDBError: Identifiable {
     public var id: Int {
         switch self {
             case .bearerTokenNotSetError: return 0
-            case .transporError(_): return 1
-            case .serverError(_): return 2
+            case .transportError: return 1
+            case .serverError: return 2
             case .emptyData: return 3
-            case .decodingError(_): return 4
-            case .seasonDecodingError(_, _): return 5
+            case .decodingError: return 4
+            case .seasonDecodingError: return 5
+            case .malformedInput: return 6
         }
     }
 }

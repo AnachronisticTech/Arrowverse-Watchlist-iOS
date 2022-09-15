@@ -7,14 +7,14 @@
 //
 
 import SwiftUI
-import TVDBKit
+import TheMovieDBKit
 
 @main
 struct ArrowverseWatchlistApp: App {
     let persistenceController = PersistenceController.shared
 
     init() {
-        TVDB.setToken(Constants.apiKey)
+        TheMovieDB.setToken(Constants.apiKey)
     }
 
     var body: some Scene {
