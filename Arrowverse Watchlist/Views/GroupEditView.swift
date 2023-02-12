@@ -19,16 +19,16 @@ struct GroupEditView: View {
     @State private var blue: Double = 0
     @State private var icon: String = ""
 
-    @ObservedObject private var group: ShowGroupDB
+    @ObservedObject private var group: SeriesCollection
 
     private let title: String
 
-    init(creating group: ShowGroupDB) {
+    init(creating group: SeriesCollection) {
         self.group = group
         title = "Add a new group"
     }
 
-    init(updating group: ShowGroupDB) {
+    init(updating group: SeriesCollection) {
         self.group = group
         title = "Update a group"
         _groupName = State(initialValue: group.name)
@@ -144,8 +144,8 @@ struct GroupEditView: View {
 }
 
 struct GroupEditView_Previews: PreviewProvider {
-    static var showGroup: ShowGroupDB = {
-        let group = ShowGroupDB()
+    static var showGroup: SeriesCollection = {
+        let group = SeriesCollection()
         group.name = "Stargate"
         group.red = 22
         group.green = 75
@@ -156,7 +156,7 @@ struct GroupEditView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             NavigationView {
-                GroupEditView(creating: ShowGroupDB(context: PersistenceController.preview.container.viewContext))
+                GroupEditView(creating: SeriesCollection(context: PersistenceController.preview.container.viewContext))
             }
             Divider()
             NavigationView {

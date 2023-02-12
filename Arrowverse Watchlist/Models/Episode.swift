@@ -1,5 +1,5 @@
 //
-//  WatchableEpisode.swift
+//  Episode.swift
 //  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 23/08/2021.
@@ -10,10 +10,10 @@
 import Foundation
 import CoreData
 
-@objc(WatchableEpisode)
-public class WatchableEpisode: NSManagedObject, Identifiable {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<WatchableEpisode> {
-        return NSFetchRequest<WatchableEpisode>(entityName: "WatchableEpisode")
+@objc(Episode)
+public class Episode: NSManagedObject, Identifiable {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Episode> {
+        return NSFetchRequest<Episode>(entityName: "Episode")
     }
 
     @NSManaged public var id: Int64
@@ -23,5 +23,5 @@ public class WatchableEpisode: NSManagedObject, Identifiable {
     @NSManaged public var episodeNumber: Int64
     @NSManaged public var seasonNumber: Int64
 
-    @NSManaged var show: ShowDB
+    @NSManaged var show: Series
 }

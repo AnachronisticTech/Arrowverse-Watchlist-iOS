@@ -19,7 +19,7 @@ struct GroupMainView: View {
     private var isRequestInProgress: Bool { requestsInProgress > 0 }
     @State private var isShowingReloadIndicator = false
 
-    @ObservedObject var group: ShowGroupDB
+    @ObservedObject var group: SeriesCollection
 
     var body: some View {
         EpisodeListView(shows: group.trackedShows) { episode in
@@ -75,7 +75,7 @@ struct GroupMainView: View {
         }
     }
 
-    func fetch(_ show: ShowDB) {
+    func fetch(_ show: Series) {
         requestsInProgress += 1
         TheMovieDB.Convenience.getEpisodes(ofShow: Int(show.id)) { result in
             switch result {

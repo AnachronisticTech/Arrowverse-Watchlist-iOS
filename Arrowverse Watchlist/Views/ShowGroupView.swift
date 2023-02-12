@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ShowGroupView: View {
-    @ObservedObject var group: ShowGroupDB
+    @ObservedObject var group: SeriesCollection
 
     var body: some View {
         ZStack {

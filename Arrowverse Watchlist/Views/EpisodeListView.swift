@@ -11,22 +11,22 @@ import SwiftUI
 struct EpisodeListView<Content: View>: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    private var content: (WatchableEpisode) -> Content
-    private var request: FetchRequest<WatchableEpisode>
-    private var episodes: FetchedResults<WatchableEpisode> {
+    private var content: (Episode) -> Content
+    private var request: FetchRequest<Episode>
+    private var episodes: FetchedResults<Episode> {
         request.wrappedValue
     }
 
     init(
-        shows: [ShowDB],
-        @ViewBuilder _ content: @escaping (WatchableEpisode) -> Content
+        shows: [Series],
+        @ViewBuilder _ content: @escaping (Episode) -> Content
     ) {
         self.content = content
-        request = FetchRequest<WatchableEpisode>(
-            entity: WatchableEpisode.entity(),
+        request = FetchRequest<Episode>(
+            entity: Episode.entity(),
             sortDescriptors: [
-                NSSortDescriptor(keyPath: \WatchableEpisode.airDate, ascending: true),
-                NSSortDescriptor(keyPath: \WatchableEpisode.name, ascending: true)
+                NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+                NSSortDescriptor(keyPath: \Episode.name, ascending: true)
             ],
             predicate: NSCompoundPredicate(
                 type: .or,

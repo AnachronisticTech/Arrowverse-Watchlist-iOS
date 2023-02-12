@@ -12,7 +12,7 @@ import TheMovieDBKit
 struct ShowSearchView: View {
     @Environment(\.managedObjectContext) var viewContext
 
-    @ObservedObject var group: ShowGroupDB
+    @ObservedObject var group: SeriesCollection
 
     @State private var searchTerm = ""
     @State private var searchResults: SeriesSearchResult?
@@ -49,13 +49,7 @@ struct ShowSearchView: View {
                         Spacer()
                         Button {
                             if let show = group.shows.first(where: { $0.id == result.id }) {
-                                viewContext.delete(show)
-
-                                do {
-                                    try viewContext.save()
-                                } catch {
-                                    print("Failed to save show state: \(error)")
-                                }
+                                DatabaseManager.delete(show)
                             } else {
                                 DatabaseManager.save(result, into: group)
                             }
@@ -85,8 +79,8 @@ struct ShowSearchView: View {
 }
 
 struct ShowSearchView_Previews: PreviewProvider {
-    static var showGroup: ShowGroupDB = {
-        let group = ShowGroupDB()
+    static var showGroup: SeriesCollection = {
+        let group = SeriesCollection()
         group.name = "Stargate"
         group.red = 22
         group.green = 75

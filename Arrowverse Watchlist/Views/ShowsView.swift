@@ -16,11 +16,11 @@ struct ShowsView: View {
 
     @FetchRequest(
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \ShowGroupDB.name, ascending: true)
+            NSSortDescriptor(keyPath: \SeriesCollection.name, ascending: true)
         ],
         predicate: NSPredicate(format: "isCreated == %@", NSNumber(value: true))
     )
-    private var groups: FetchedResults<ShowGroupDB>
+    private var groups: FetchedResults<SeriesCollection>
 
     let columns: [GridItem] = [GridItem(), GridItem()]
 
@@ -41,13 +41,7 @@ struct ShowsView: View {
                                 activeSheet = .edit(group)
                             }
                             Button("Delete") {
-                                viewContext.delete(group)
-
-                                do {
-                                    try viewContext.save()
-                                } catch {
-                                    print("Could not delete object \(group): \(error)")
-                                }
+                                DatabaseManager.delete(group)
                             }
                         }
                     }
@@ -64,38 +58,22 @@ struct ShowsView: View {
                     }
                 }
 
+                #if DEBUG
                 ToolbarItem(placement: .destructiveAction) {
                     Button {
-                        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Show")
-                        let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-                        do {
-                            try viewContext.execute(batchDelete)
-                            try viewContext.save()
-                        } catch {
-                            print("Could not delete shows with error \(error)")
-                        }
-
-                        let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>(entityName: "ShowGroup")
-                        let batchDelete2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
-
-                        do {
-                            try viewContext.execute(batchDelete2)
-                            try viewContext.save()
-                        } catch {
-                            print("Could not delete showgroups with error \(error)")
-                        }
+                        DatabaseManager.deleteAll()
                     } label: {
                         Image(systemName: "trash")
                     }
                 }
+                #endif
             }
         }
         .navigationViewStyle(.stack)
         .sheet(item: $activeSheet) { mode in
             switch mode {
                 case .add:
-                    GroupEditView(creating: ShowGroupDB(context: viewContext))
+                    GroupEditView(creating: SeriesCollection(context: viewContext))
                 case .edit(let group):
                     GroupEditView(updating: group)
             }
@@ -104,7 +82,7 @@ struct ShowsView: View {
 
     enum ActiveSheet: Identifiable {
         case add
-        case edit(ShowGroupDB)
+        case edit(SeriesCollection)
 
         var id: Int {
             switch self {

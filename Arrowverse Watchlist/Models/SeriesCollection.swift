@@ -1,5 +1,5 @@
 //
-//  ShowGroup.swift
+//  SeriesCollection.swift
 //  Arrowverse Watchlist
 //
 //  Created by Daniel Marriner on 03/09/2022.
@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-@objc(ShowGroupDB)
-public class ShowGroupDB: NSManagedObject, Identifiable {
+@objc(SeriesCollection)
+public class SeriesCollection: NSManagedObject, Identifiable {
     @NSManaged var name: String
     @NSManaged var imageData: Data?
     @NSManaged var red: Int16
@@ -18,13 +18,13 @@ public class ShowGroupDB: NSManagedObject, Identifiable {
     @NSManaged var blue: Int16
 
     @NSManaged private var pShows: NSSet
-    public var shows: [ShowDB] {
-        let set = pShows as? Set<ShowDB> ?? []
+    public var shows: [Series] {
+        let set = pShows as? Set<Series> ?? []
         return set
             .sorted { ($0.airDate ?? Date(timeIntervalSince1970: 0), $0.name) < ($1.airDate ?? Date(timeIntervalSince1970: 0), $1.name) }
     }
 
-    public var trackedShows: [ShowDB] { shows.filter({ $0.isTracking }) }
+    public var trackedShows: [Series] { shows.filter({ $0.isTracking }) }
 
     @NSManaged var isCreated: Bool
 

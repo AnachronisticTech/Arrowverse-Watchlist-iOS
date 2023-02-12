@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EpisodeView: View {
-    @ObservedObject var episode: WatchableEpisode
+    @ObservedObject var episode: Episode
 
     var body: some View {
         HStack {
