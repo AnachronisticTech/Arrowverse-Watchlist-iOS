@@ -7,11 +7,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ShowsView: View {
-    @State private var isInEditMode = false
+    @Environment(\.managedObjectContext) var viewContext
 
-    let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
+    @State private var activeSheet: ActiveSheet?
+
+    @FetchRequest(
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \ShowGroupDB.name, ascending: true)
+        ],
+        predicate: NSPredicate(format: "isCreated == %@", NSNumber(value: true))
+    )
+    private var groups: FetchedResults<ShowGroupDB>
 
     let columns: [GridItem] = [GridItem(), GridItem()]
 
@@ -19,43 +28,27 @@ struct ShowsView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
-                    if isInEditMode || config.groupings.isEmpty {
+                    ForEach(groups) { group in
                         NavigationLink {
-                            GroupEditView()
-                        } label: {
-                            VStack {
-                                Spacer()
-                                HStack {
-                                    Spacer()
-                                    Text("New Group")
-                                        .font(.title2)
-                                        .multilineTextAlignment(.trailing)
-                                        .foregroundColor(.blue)
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.title2)
-                                        .foregroundColor(.blue)
-                                }
-                                .padding([.horizontal, .bottom])
-                            }
-                            .frame(height: 100)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color(UIColor.systemGray5))
-                            )
-                        }
-                        .transition(.slide)
-                    }
-
-                    ForEach(config.groupings) { group in
-                        NavigationLink {
-                            if isInEditMode {
-                                GroupEditView(group)
-                            } else {
-                                GroupMainView(groupManager: GroupManager(config, group.id))
-                                    .navigationTitle(group.name)
-                            }
+                            GroupMainView(group: group)
+                                .navigationTitle(group.name)
                         } label: {
                             ShowGroupView(group: group)
+                        }
+                        .contentShape(RoundedRectangle(cornerRadius: 10))
+                        .contextMenu {
+                            Button("Edit") {
+                                activeSheet = .edit(group)
+                            }
+                            Button("Delete") {
+                                viewContext.delete(group)
+
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    print("Could not delete object \(group): \(error)")
+                                }
+                            }
                         }
                     }
                 }
@@ -65,16 +58,60 @@ struct ShowsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        withAnimation {
-                            isInEditMode.toggle()
+                        activeSheet = .add
+                    } label: {
+                        Image(systemName: "pencil.circle")
+                    }
+                }
+
+                ToolbarItem(placement: .destructiveAction) {
+                    Button {
+                        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Show")
+                        let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+                        do {
+                            try viewContext.execute(batchDelete)
+                            try viewContext.save()
+                        } catch {
+                            print("Could not delete shows with error \(error)")
+                        }
+
+                        let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>(entityName: "ShowGroup")
+                        let batchDelete2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
+
+                        do {
+                            try viewContext.execute(batchDelete2)
+                            try viewContext.save()
+                        } catch {
+                            print("Could not delete showgroups with error \(error)")
                         }
                     } label: {
-                        Image(systemName: "pencil.circle\(isInEditMode ? ".fill" : "")")
+                        Image(systemName: "trash")
                     }
                 }
             }
         }
         .navigationViewStyle(.stack)
+        .sheet(item: $activeSheet) { mode in
+            switch mode {
+                case .add:
+                    GroupEditView(creating: ShowGroupDB(context: viewContext))
+                case .edit(let group):
+                    GroupEditView(updating: group)
+            }
+        }
+    }
+
+    enum ActiveSheet: Identifiable {
+        case add
+        case edit(ShowGroupDB)
+
+        var id: Int {
+            switch self {
+                case .add: return 0
+                case .edit: return 1
+            }
+        }
     }
 }
 

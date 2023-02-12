@@ -10,11 +10,10 @@ import SwiftUI
 
 struct EpisodeView: View {
     @ObservedObject var episode: WatchableEpisode
-    let show: Show
 
     var body: some View {
         HStack {
-            if let image = show.image {
+            if let image = episode.show.image {
                 HStack {
                     Image(uiImage: image)
                         .resizable()
@@ -27,7 +26,7 @@ struct EpisodeView: View {
             VStack(alignment: .leading) {
                 Text(episode.name)
                 HStack {
-                    Text("\(show.name) \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
+                    Text("\(episode.show.name) \(episode.seasonNumber)x\(episode.episodeNumber) - ") +
                         Text(Utils.dateFormatter.string(from: episode.airDate))
                 }
                 .font(.caption)
@@ -36,6 +35,6 @@ struct EpisodeView: View {
             Spacer()
         }
         .contentShape(Rectangle())
-        .listRowBackground(episode.watched ? Color.gray : Color(show.color.cgColor))
+        .listRowBackground(episode.watched ? Color.gray : Color(episode.show.color))
     }
 }

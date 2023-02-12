@@ -19,20 +19,20 @@ struct UpNextListView<Content: View>: View {
     }
     private var latestEpisodes: [WatchableEpisode] {
         episodes
-            .chunked(on: \.showId)
+            .chunked(on: \.show)
             .compactMap { id, episodes in episodes.first }
             .sorted(by: Utils.episodeSorting)
     }
 
     init(
-        shows: [Show],
+        shows: [ShowDB],
         @ViewBuilder _ content: @escaping (WatchableEpisode) -> Content
     ) {
         self.content = content
         request = FetchRequest<WatchableEpisode>(
             entity: WatchableEpisode.entity(),
             sortDescriptors: [
-                NSSortDescriptor(keyPath: \WatchableEpisode.showId, ascending: true),
+                NSSortDescriptor(keyPath: \WatchableEpisode.show, ascending: true),
                 NSSortDescriptor(keyPath: \WatchableEpisode.airDate, ascending: true),
                 NSSortDescriptor(keyPath: \WatchableEpisode.name, ascending: true)
             ],
@@ -43,7 +43,7 @@ struct UpNextListView<Content: View>: View {
                     NSCompoundPredicate(
                         type: .or,
                         subpredicates: shows
-                            .map { NSPredicate(format: "showId == %ld", $0.id) }
+                            .map { NSPredicate(format: "show == %@", $0) }
                     )
                 ])
         )

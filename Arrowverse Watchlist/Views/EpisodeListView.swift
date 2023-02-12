@@ -18,7 +18,7 @@ struct EpisodeListView<Content: View>: View {
     }
 
     init(
-        shows: [Show],
+        shows: [ShowDB],
         @ViewBuilder _ content: @escaping (WatchableEpisode) -> Content
     ) {
         self.content = content
@@ -31,14 +31,14 @@ struct EpisodeListView<Content: View>: View {
             predicate: NSCompoundPredicate(
                 type: .or,
                 subpredicates: shows
-                    .map { NSPredicate(format: "showId == %ld", $0.id) }
+                    .map { NSPredicate(format: "show == %@", $0) }
             )
         )
     }
 
     var body: some View {
         List(episodes, rowContent: content)
-            .id(UUID())
+//            .id(UUID())
     }
 }
 

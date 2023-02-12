@@ -19,9 +19,9 @@ public class WatchableEpisode: NSManagedObject, Identifiable {
     @NSManaged public var id: Int64
     @NSManaged public var name: String
     @NSManaged public var airDate: Date
-    @NSManaged public var rawShow: String
     @NSManaged public var watched: Bool
     @NSManaged public var episodeNumber: Int64
     @NSManaged public var seasonNumber: Int64
-    @NSManaged public var showId: Int
+
+    @NSManaged var show: ShowDB
 }

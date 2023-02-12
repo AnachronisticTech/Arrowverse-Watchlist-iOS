@@ -9,27 +9,18 @@
 import SwiftUI
 
 struct UpNextMainView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @StateObject var groupManager: GroupManager
+    @ObservedObject var group: ShowGroupDB
 
     var body: some View {
         ScrollView {
-            UpNextListView(shows: Array(groupManager.trackedShows)) { episode in
-                EpisodeView(episode: episode, show: groupManager.show(for: episode)!)
+            UpNextListView(shows: group.shows) { episode in
+                EpisodeView(episode: episode)
                     .padding(10)
-                    .background(Color(groupManager.show(for: episode)!.color.cgColor))
+                    .background(Color.black)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding([.leading, .bottom, .trailing], 5)
                     .onTapGesture {
-                        if episode.airDate < Date(timeIntervalSinceNow: 0) {
-                            episode.watched.toggle()
-                            do {
-                                try viewContext.save()
-                            } catch {
-                                print("[ERROR] Could not save watch state for \(episode). \(error)")
-                            }
-                        }
+                        DatabaseManager.toggleWatchedStatus(for: episode)
                     }
             }
             .padding(.horizontal)
@@ -37,10 +28,10 @@ struct UpNextMainView: View {
     }
 }
 
-struct UpNextView_Previews: PreviewProvider {
-    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
-
-    static var previews: some View {
-        UpNextMainView(groupManager: GroupManager(config, 0))
-    }
-}
+//struct UpNextView_Previews: PreviewProvider {
+//    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
+//
+//    static var previews: some View {
+//        UpNextMainView(groupManager: GroupManager(config, 0))
+//    }
+//}

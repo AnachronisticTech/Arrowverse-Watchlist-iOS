@@ -11,27 +11,21 @@ import SwiftUIRefresh
 import TheMovieDBKit
 
 struct GroupMainView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
     @State private var isShowingError: TheMovieDBError?
     @State private var isShowingFilterSheet = false
     @State private var isShowingUpNextSheet = false
+
+    @State private var requestsInProgress = 0
+    private var isRequestInProgress: Bool { requestsInProgress > 0 }
     @State private var isShowingReloadIndicator = false
 
-    @StateObject var groupManager: GroupManager
+    @ObservedObject var group: ShowGroupDB
 
     var body: some View {
-        EpisodeListView(shows: Array(groupManager.trackedShows)) { episode in
-            EpisodeView(episode: episode, show: groupManager.show(for: episode)!)
+        EpisodeListView(shows: group.trackedShows) { episode in
+            EpisodeView(episode: episode)
                 .onTapGesture {
-                    if episode.airDate < Date(timeIntervalSinceNow: 0) {
-                        episode.watched.toggle()
-                        do {
-                            try viewContext.save()
-                        } catch {
-                            print("[ERROR] Could not save watch state for \(episode). \(error)")
-                        }
-                    }
+                    DatabaseManager.toggleWatchedStatus(for: episode)
                 }
         }
         .toolbar {
@@ -58,27 +52,52 @@ struct GroupMainView: View {
             )
         }
         .sheet(isPresented: $isShowingFilterSheet) {
-            ShowFilterView(groupManager: groupManager)
+            ShowFilterView(group: group)
         }
         .sheet(isPresented: $isShowingUpNextSheet) {
-            UpNextMainView(groupManager: groupManager)
+            UpNextMainView(group: group)
         }
-        .onChange(of: groupManager.isRequestInProgress) { value in
+        .onChange(of: isRequestInProgress) { value in
             isShowingReloadIndicator = value
         }
-//        .onAppear {
-//            groupManager.fetch(into: viewContext)
-//        }
-//        .pullToRefresh(isShowing: $isShowingReloadIndicator) {
-//            groupManager.fetch(into: viewContext)
-//        }
+        .onAppear {
+//            print(group.shows.flatMap({ $0.episodes }).map({ $0.name }))
+            for show in group.shows where !show.hasPerformedFirstFetch {
+                print(show.name)
+                fetch(show)
+            }
+        }
+        .pullToRefresh(isShowing: $isShowingReloadIndicator) {
+            guard requestsInProgress == 0 else { return }
+            for show in group.shows {
+                fetch(show)
+            }
+        }
+    }
+
+    func fetch(_ show: ShowDB) {
+        requestsInProgress += 1
+        TheMovieDB.Convenience.getEpisodes(ofShow: Int(show.id)) { result in
+            switch result {
+                case .failure(let error):
+                    print(error)
+                    if case .seasonDecodingError(_, let episodes) = error {
+                        DatabaseManager.save(episodes, into: show)
+                    }
+                case .success(let episodes):
+                    DatabaseManager.save(episodes, into: show)
+            }
+            DispatchQueue.main.async {
+                self.requestsInProgress -= 1
+            }
+        }
     }
 }
 
-struct GroupMainView_Previews: PreviewProvider {
-    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
-
-    static var previews: some View {
-        GroupMainView(groupManager: GroupManager(config, 0))
-    }
-}
+//struct GroupMainView_Previews: PreviewProvider {
+//    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
+//
+//    static var previews: some View {
+//        GroupMainView(groupManager: GroupManager(config, 0))
+//    }
+//}

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ShowFilterView: View {
-    @StateObject var groupManager: GroupManager
+    @ObservedObject var group: ShowGroupDB
 
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct ShowFilterView: View {
                 .padding([.top, .horizontal])
             ScrollView {
                 LazyVStack {
-                    ForEach(groupManager.shows) { show in
+                    ForEach(group.shows) { show in
                         HStack {
                             if let image = show.image {
                                 HStack {
@@ -36,11 +36,11 @@ struct ShowFilterView: View {
                                 .foregroundColor(.white)
                             Spacer()
                         }
-                        .background(groupManager.trackedShows.contains(show) ? Color(show.color.cgColor) : Color.gray)
+                        .background(show.isTracking ? Color(show.color) : Color.gray)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding([.leading, .bottom, .trailing], 5)
                         .onTapGesture {
-                            groupManager.toggleTrackedStatus(for: show)
+                            DatabaseManager.toggleTrackingStatus(for: show)
                         }
                     }
                 }
@@ -50,12 +50,12 @@ struct ShowFilterView: View {
     }
 }
 
-struct ShowFilterList_Previews: PreviewProvider {
-    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
-
-    static var previews: some View {
-        ShowFilterView(groupManager: GroupManager(config, 0))
-        ShowFilterView(groupManager: GroupManager(config, 1))
-        ShowFilterView(groupManager: GroupManager(config, 2))
-    }
-}
+//struct ShowFilterList_Previews: PreviewProvider {
+//    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
+//
+//    static var previews: some View {
+//        ShowFilterView(groupManager: GroupManager(config, 0))
+//        ShowFilterView(groupManager: GroupManager(config, 1))
+//        ShowFilterView(groupManager: GroupManager(config, 2))
+//    }
+//}

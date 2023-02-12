@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
-struct ShowGroup: Codable, Identifiable {
-    let id: Int
-    let name: String
-    let icon: String
-    let color: ShowColor
+@objc(ShowGroupDB)
+public class ShowGroupDB: NSManagedObject, Identifiable {
+    @NSManaged var name: String
+    @NSManaged var imageData: Data?
+    @NSManaged var red: Int16
+    @NSManaged var green: Int16
+    @NSManaged var blue: Int16
 
-    var image: UIImage? {
-        if let data = Data(base64Encoded: icon, options: .ignoreUnknownCharacters) {
-            return UIImage(data: data)
-        }
+    @NSManaged private var pShows: NSSet
+    public var shows: [ShowDB] {
+        let set = pShows as? Set<ShowDB> ?? []
+        return set
+            .sorted { ($0.airDate ?? Date(timeIntervalSince1970: 0), $0.name) < ($1.airDate ?? Date(timeIntervalSince1970: 0), $1.name) }
+    }
 
-        return nil
+    public var trackedShows: [ShowDB] { shows.filter({ $0.isTracking }) }
+
+    @NSManaged var isCreated: Bool
+
+    var color: CGColor {
+        CGColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: 1)
     }
 }
