@@ -6,7 +6,7 @@
 //  Copyright © 2020 Daniel Marriner. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 import CoreData
 
 @objc(Series)
@@ -15,9 +15,9 @@ public class Series: NSManagedObject, Identifiable {
     @NSManaged var name: String
     @NSManaged var airDate: Date?
     @NSManaged var imageData: Data?
-    @NSManaged var red: Int16
-    @NSManaged var green: Int16
-    @NSManaged var blue: Int16
+    @NSManaged private var red: Float
+    @NSManaged private var green: Float
+    @NSManaged private var blue: Float
     @NSManaged var hasPerformedFirstFetch: Bool
     @NSManaged var isTracking: Bool
 
@@ -29,15 +29,14 @@ public class Series: NSManagedObject, Identifiable {
         return set.sorted(by: Utils.episodeSorting)
     }
 
-    var image: UIImage? {
-        if let data = imageData {
-            return UIImage(data: data)
-        }
-
-        return nil
-    }
-
     var color: CGColor {
-        CGColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: 1)
+        get {
+            CGColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
+        }
+        set {
+            red = Float(newValue.components![0])
+            green = Float(newValue.components![1])
+            blue = Float(newValue.components![2])
+        }
     }
 }

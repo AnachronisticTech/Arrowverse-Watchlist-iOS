@@ -79,18 +79,9 @@ struct ShowSearchView: View {
 }
 
 struct ShowSearchView_Previews: PreviewProvider {
-    static var showGroup: SeriesCollection = {
-        let group = SeriesCollection()
-        group.name = "Stargate"
-        group.red = 22
-        group.green = 75
-        group.blue = 123
-        return group
-    }()
-
     static var previews: some View {
         NavigationView {
-            ShowSearchView(group: showGroup)
+            ShowSearchView(group: PersistenceController.group)
         }
     }
 }

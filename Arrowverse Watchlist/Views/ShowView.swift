@@ -1,23 +1,23 @@
 //
-//  EpisodeView.swift
+//  ShowView.swift
 //  Arrowverse Watchlist
 //
-//  Created by Daniel Marriner on 21/08/2021.
-//  Copyright © 2021 Daniel Marriner. All rights reserved.
+//  Created by Daniel Marriner on 24/06/2023.
+//  Copyright © 2023 Daniel Marriner. All rights reserved.
 //
 
 import SwiftUI
 import VisualEffects
 
-struct EpisodeView: View {
-    @ObservedObject var episode: Episode
+struct ShowView: View {
+    @ObservedObject var show: Series
 
     var body: some View {
         ZStack {
             VisualEffectBlur(blurStyle: .systemUltraThinMaterial) {}
 
             HStack {
-                if let imageData = episode.show.imageData, let image = Image(imageData) {
+                if let imageData = show.imageData, let image = Image(imageData) {
                     HStack {
                         image
                             .resizable()
@@ -29,19 +29,13 @@ struct EpisodeView: View {
                 }
 
                 VStack(alignment: .leading) {
-                    Text(episode.name)
-                    HStack {
-                        Text(episode.show.name)
-                        Text("\(episode.seasonNumber)x\(episode.episodeNumber)")
-                        Text("-")
-                        Text(Utils.dateFormatter.string(from: episode.airDate))
-                    }
-                    .font(.caption)
+                    Text(show.name)
+                        .font(.title)
                 }
                 .foregroundColor(Color(UIColor.label))
                 Spacer()
 
-                if episode.watched {
+                if show.isTracking {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
                         .foregroundColor(.green)
@@ -57,7 +51,7 @@ struct EpisodeView: View {
         }
         .contentShape(Rectangle())
         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .background(imageBackground(data: episode.show.imageData))
+        .background(imageBackground(data: show.imageData))
         .clipShape(Rectangle())
     }
 
@@ -72,13 +66,13 @@ struct EpisodeView: View {
     }
 }
 
-struct EpisodeView_Previews: PreviewProvider {
+struct ShowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            EpisodeView(episode: PersistenceController.episode)
+            ShowView(show: PersistenceController.series)
             List {
                 ForEach(0..<10, id: \.self) { _ in
-                    EpisodeView(episode: PersistenceController.episode)
+                    ShowView(show: PersistenceController.series)
                 }
             }
         }

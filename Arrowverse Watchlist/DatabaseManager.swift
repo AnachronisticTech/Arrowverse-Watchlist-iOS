@@ -81,13 +81,12 @@ class DatabaseManager {
     }
 
     public static func toggleWatchedStatus(for episode: Episode) {
-        if episode.airDate < Date(timeIntervalSinceNow: 0) {
-            episode.watched.toggle()
-            do {
-                try container.viewContext.save()
-            } catch {
-                print("[ERROR] Could not save watch state for \(episode). \(error)")
-            }
+        guard episode.airDate < Date(timeIntervalSinceNow: 0) else { return }
+        episode.watched.toggle()
+        do {
+            try container.viewContext.save()
+        } catch {
+            print("[ERROR] Could not save watch state for \(episode). \(error)")
         }
     }
 

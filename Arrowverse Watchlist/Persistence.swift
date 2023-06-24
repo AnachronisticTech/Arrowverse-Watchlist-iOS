@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import UIKit
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -14,10 +15,24 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+
+        let seriesCollection = SeriesCollection(context: viewContext)
+        seriesCollection.name = "Stargate"
+        seriesCollection.isCreated = true
+        seriesCollection.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+
+//        let series = Series(context: viewContext)
+//        series.name = "Stargate SG-1"
+//        series.group = seriesCollection
+//        series.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+
+//        let episode = Episode(context: viewContext)
+//        episode.name = "Children of the Gods"
+//        episode.show = series
+//        episode.seasonNumber = 1
+//        episode.episodeNumber = 1
+//        episode.airDate = Date(timeIntervalSinceNow: 0)
+
         do {
             try viewContext.save()
         } catch {
@@ -55,5 +70,34 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+    }
+}
+
+extension PersistenceController {
+    static var group: SeriesCollection {
+        let seriesCollection = SeriesCollection(context: PersistenceController.preview.container.viewContext)
+        seriesCollection.name = "Stargate"
+        seriesCollection.imageData = UIImage.sampleData
+        seriesCollection.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+        return seriesCollection
+    }
+
+    static var series: Series {
+        let series = Series(context: PersistenceController.preview.container.viewContext)
+        series.name = "Stargate SG-1"
+        series.imageData = UIImage.sampleData
+        series.group = group
+        series.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+        return series
+    }
+
+    static var episode: Episode {
+        let episode = Episode(context: PersistenceController.preview.container.viewContext)
+        episode.name = "Children of the Gods"
+        episode.show = series
+        episode.seasonNumber = 1
+        episode.episodeNumber = 1
+        episode.airDate = Date(timeIntervalSinceNow: 0)
+        return episode
     }
 }

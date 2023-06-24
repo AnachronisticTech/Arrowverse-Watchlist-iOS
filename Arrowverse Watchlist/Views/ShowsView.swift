@@ -96,5 +96,6 @@ struct ShowsView: View {
 struct ShowsView_Previews: PreviewProvider {
     static var previews: some View {
         ShowsView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

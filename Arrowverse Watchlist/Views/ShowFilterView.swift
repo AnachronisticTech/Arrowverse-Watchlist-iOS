@@ -8,54 +8,37 @@
 
 import SwiftUI
 
-struct ShowFilterView: View {
+struct ShowFilterView<Content: View>: View {
     @ObservedObject var group: SeriesCollection
+    @ViewBuilder var content: (Series) -> Content
 
     var body: some View {
-        VStack {
-            Text("Choose shows to track")
-                .font(.title)
-                .padding([.top, .horizontal])
-            ScrollView {
-                LazyVStack {
-                    ForEach(group.shows) { show in
-                        HStack {
-                            if let image = show.image {
-                                HStack {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(maxWidth: 65, maxHeight: 65)
-                                }
-                                .frame(width: 65, height: 65, alignment: .center)
-                                .padding(10)
-                            }
-
-                            Text(show.name)
-                                .font(.title)
-                                .foregroundColor(.white)
-                            Spacer()
-                        }
-                        .background(show.isTracking ? Color(show.color) : Color.gray)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .padding([.leading, .bottom, .trailing], 5)
-                        .onTapGesture {
-                            DatabaseManager.toggleTrackingStatus(for: show)
-                        }
-                    }
+        List {
+            Section(header: titleView("Choose shows to track")) {
+                ForEach(group.shows) { show in
+                    content(show)
                 }
-                .padding(.horizontal)
             }
         }
+        .listStyle(.plain)
+        .listRowInsets(.none)
+    }
+
+    @ViewBuilder private func titleView(_ text: String) -> some View {
+        HStack {
+            Spacer()
+            Text(text)
+                .font(.title)
+            Spacer()
+        }
+        .padding([.top])
     }
 }
 
-//struct ShowFilterList_Previews: PreviewProvider {
-//    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
-//
-//    static var previews: some View {
-//        ShowFilterView(groupManager: GroupManager(config, 0))
-//        ShowFilterView(groupManager: GroupManager(config, 1))
-//        ShowFilterView(groupManager: GroupManager(config, 2))
-//    }
-//}
+struct ShowFilterList_Previews: PreviewProvider {
+    static var previews: some View {
+        ShowFilterView(group: PersistenceController.group) { show in
+            ShowView(show: show)
+        }
+    }
+}

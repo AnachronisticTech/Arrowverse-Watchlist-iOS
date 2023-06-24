@@ -16,8 +16,8 @@ struct AsyncImageView: View {
 
     var body: some View {
         Group {
-            if let data = imageData, let image = UIImage(data: data) {
-                Image(uiImage: image)
+            if let data = imageData, let image = Image(data) {
+                image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             } else {

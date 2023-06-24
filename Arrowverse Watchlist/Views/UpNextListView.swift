@@ -14,11 +14,9 @@ struct UpNextListView<Content: View>: View {
 
     private var content: (Episode) -> Content
     private var request: FetchRequest<Episode>
-    private var episodes: FetchedResults<Episode> {
-        request.wrappedValue
-    }
     private var latestEpisodes: [Episode] {
-        episodes
+        request
+            .wrappedValue
             .chunked(on: \.show)
             .compactMap { id, episodes in episodes.first }
             .sorted(by: Utils.episodeSorting)
@@ -50,30 +48,40 @@ struct UpNextListView<Content: View>: View {
     }
 
     var body: some View {
-        LazyVStack {
-            Text("Up Next")
-                .font(.title)
-                .padding([.top])
-
-            ForEach(latestEpisodes.filter({ $0.airDate < Date(timeIntervalSinceNow: 0) })) { episode in
-                content(episode)
+        List {
+            Section(header: titleView("Up Next")) {
+                ForEach(latestEpisodes.filter({ $0.airDate < Date(timeIntervalSinceNow: 0) })) { episode in
+                    content(episode)
+                }
             }
 
-            Text("Coming Soon")
-                .font(.title)
-                .padding([.top])
-
-            ForEach(latestEpisodes.filter({ $0.airDate > Date(timeIntervalSinceNow: 0) })) { episode in
-                content(episode)
+            if latestEpisodes.filter({ $0.airDate > Date(timeIntervalSinceNow: 0) }).count > 0 {
+                Section(header: titleView("Coming Soon")) {
+                    ForEach(latestEpisodes.filter({ $0.airDate > Date(timeIntervalSinceNow: 0) })) { episode in
+                        content(episode)
+                    }
+                }
             }
         }
+        .listStyle(.plain)
+        .listRowInsets(.none)
+    }
+
+    @ViewBuilder private func titleView(_ text: String) -> some View {
+        HStack {
+            Spacer()
+            Text(text)
+                .font(.title)
+            Spacer()
+        }
+        .padding([.top])
     }
 }
 
 struct UpNextListView_Previews: PreviewProvider {
     static var previews: some View {
-        UpNextListView(shows: []) { episode in
-            Text(episode.name)
+        UpNextListView(shows: PersistenceController.group.shows) { episode in
+            EpisodeView(episode: episode)
         }
     }
 }

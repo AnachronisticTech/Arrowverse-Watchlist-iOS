@@ -44,8 +44,8 @@ struct EpisodeListView<Content: View>: View {
 
 struct EpisodeListView_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeListView(shows: []) { episode in
-            Text(episode.name)
+        EpisodeListView(shows: [PersistenceController.series]) { episode in
+            EpisodeView(episode: episode)
         }
     }
 }

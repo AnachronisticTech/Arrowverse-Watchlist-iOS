@@ -28,15 +28,16 @@ struct GroupMainView: View {
                     DatabaseManager.toggleWatchedStatus(for: episode)
                 }
         }
+        .navigationTitle(group.name)
         .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     isShowingFilterSheet = true
                 } label: {
                     Image(systemName: "line.horizontal.3.decrease.circle")
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     isShowingUpNextSheet = true
                 } label: {
@@ -52,10 +53,20 @@ struct GroupMainView: View {
             )
         }
         .sheet(isPresented: $isShowingFilterSheet) {
-            ShowFilterView(group: group)
+            ShowFilterView(group: group) { show in
+                ShowView(show: show)
+                    .onTapGesture {
+                        DatabaseManager.toggleTrackingStatus(for: show)
+                    }
+            }
         }
         .sheet(isPresented: $isShowingUpNextSheet) {
-            UpNextMainView(group: group)
+            UpNextListView(shows: group.shows) { episode in
+                EpisodeView(episode: episode)
+                    .onTapGesture {
+                        DatabaseManager.toggleWatchedStatus(for: episode)
+                    }
+            }
         }
         .onChange(of: isRequestInProgress) { value in
             isShowingReloadIndicator = value
@@ -94,10 +105,10 @@ struct GroupMainView: View {
     }
 }
 
-//struct GroupMainView_Previews: PreviewProvider {
-//    static let config: Config = try! JSONDecoder().decode(Config.self, from: Data(contentsOf: Bundle.main.url(forResource: "Content", withExtension: "json")!))
-//
-//    static var previews: some View {
-//        GroupMainView(groupManager: GroupManager(config, 0))
-//    }
-//}
+struct GroupMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            GroupMainView(group: PersistenceController.group)
+        }
+    }
+}

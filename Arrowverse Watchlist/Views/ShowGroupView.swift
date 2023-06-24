@@ -17,16 +17,16 @@ struct ShowGroupView: View {
                 .foregroundColor(Color(group.color))
                 .frame(height: 100)
 
-//            if let image = group.image {
-//                HStack {
-//                    Image(uiImage: image)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(maxWidth: 65, maxHeight: 65)
-//                    Spacer()
-//                }
-//                .padding()
-//            }
+            if let imageData = group.imageData, let image = Image(imageData) {
+                HStack {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 65, maxHeight: 65)
+                    Spacer()
+                }
+                .padding()
+            }
 
             VStack {
                 Spacer()
@@ -40,5 +40,12 @@ struct ShowGroupView: View {
                 .padding([.horizontal, .bottom])
             }
         }
+        .frame(height: 100)
+    }
+}
+
+struct ShowGroupView_Previews: PreviewProvider {
+    static var previews: some View {
+        ShowGroupView(group: PersistenceController.group)
     }
 }
