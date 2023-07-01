@@ -59,7 +59,7 @@ struct ShowSearchView: View {
                                     .foregroundColor(.green)
                             } else {
                                 Image(systemName: "plus.circle.fill")
-                                        .foregroundColor(.blue)
+                                    .foregroundColor(.blue)
                             }
                         }
                     }

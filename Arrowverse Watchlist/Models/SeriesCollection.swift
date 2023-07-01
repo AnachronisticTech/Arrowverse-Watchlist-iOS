@@ -26,6 +26,15 @@ public class SeriesCollection: NSManagedObject, Identifiable {
     }
 
     public var trackedShows: [Series] { shows.filter({ $0.isTracking }) }
+    public var nextUp: Episode? {
+        get {
+            return trackedShows
+                .flatMap { $0.episodes }
+                .filter { !$0.watched }
+                .sorted(by: Utils.episodeSorting(_:_:))
+                .first
+        }
+    }
 
     var color: CGColor {
         get {

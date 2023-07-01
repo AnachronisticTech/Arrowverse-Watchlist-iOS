@@ -102,10 +102,15 @@ struct GroupEditView: View {
                 }
 
                 List {
-                    ForEach(group.shows) { show in
-                        Text(show.name)
+                    Section(header: titleView("Shows")) {
+                        ForEach(group.shows) { show in
+                            ShowView(show: show)
+                        }
                     }
                 }
+                .listRowInsets(.none)
+                .listStyle(.plain)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .padding()
             .navigationTitle(title)
@@ -138,6 +143,16 @@ struct GroupEditView: View {
         .introspectViewController { view in
             view.isModalInPresentation = true
         }
+    }
+
+    @ViewBuilder private func titleView(_ text: String) -> some View {
+        HStack {
+            Spacer()
+            Text(text)
+                .font(.title)
+            Spacer()
+        }
+        .padding([.top])
     }
 }
 

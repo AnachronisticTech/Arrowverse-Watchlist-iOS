@@ -26,7 +26,7 @@ struct EpisodeListView<Content: View>: View {
             entity: Episode.entity(),
             sortDescriptors: [
                 NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
-                NSSortDescriptor(keyPath: \Episode.name, ascending: true)
+                NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true)
             ],
             predicate: NSCompoundPredicate(
                 type: .or,
@@ -38,6 +38,7 @@ struct EpisodeListView<Content: View>: View {
 
     var body: some View {
         List(episodes, rowContent: content)
+            .listStyle(.plain)
 //            .id(UUID())
     }
 }

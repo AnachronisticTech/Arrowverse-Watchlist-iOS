@@ -22,32 +22,36 @@ struct ShowsView: View {
     )
     private var groups: FetchedResults<SeriesCollection>
 
-    let columns: [GridItem] = [GridItem(), GridItem()]
-
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
-                    ForEach(groups) { group in
-                        NavigationLink {
-                            GroupMainView(group: group)
-                                .navigationTitle(group.name)
-                        } label: {
-                            ShowGroupView(group: group)
-                        }
+            List {
+                ForEach(groups) { group in
+                    ShowGroupView(group: group)
+                        .listRowInsets(.init())
+                        .background(
+                            NavigationLink {
+                                GroupMainView(group: group)
+                                    .navigationTitle(group.name)
+                            } label: {
+                                Rectangle()
+                                    .opacity(0)
+                            }
+                            .opacity(0)
+                        )
                         .contentShape(RoundedRectangle(cornerRadius: 10))
                         .contextMenu {
                             Button("Edit") {
                                 activeSheet = .edit(group)
                             }
-                            Button("Delete") {
+                            Button {
                                 DatabaseManager.delete(group)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
                             }
                         }
-                    }
                 }
-                .padding(.horizontal, 5)
             }
+            .listStyle(.plain)
             .navigationTitle("Groups")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

@@ -7,40 +7,52 @@
 //
 
 import SwiftUI
+import VisualEffects
 
 struct ShowGroupView: View {
     @ObservedObject var group: SeriesCollection
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(group.color))
-                .frame(height: 100)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(group.name)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("\(group.shows.count) Series (\(group.shows.filter({ $0.isTracking }).count) Tracked)")
+                    .font(.caption)
+                Text("\(group.shows.flatMap({ $0.episodes }).count) Episodes (\(group.shows.flatMap({ $0.episodes }).filter({ $0.watched }).count) Watched)")
+                    .font(.caption)
 
-            if let imageData = group.imageData, let image = Image(imageData) {
-                HStack {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 65, maxHeight: 65)
-                    Spacer()
+                if let next = group.nextUp {
+                    if (next.airDate > Date(timeIntervalSinceNow: 0)) {
+                        Text("Coming Soon: \(next.show.name) S\(next.seasonNumber)E\(next.episodeNumber) \(next.name)")
+                            .padding(.top, 4)
+                    } else {
+                        Text("Next Up: \(next.show.name) S\(next.seasonNumber)E\(next.episodeNumber) \(next.name)")
+                            .padding(.top, 4)
+                    }
                 }
-                .padding()
             }
+            .foregroundColor(.white)
+            .padding()
 
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text(group.name)
-                        .font(.title)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(.white)
+            Spacer()
+        }
+        .background(artworkBackground())
+        .clipShape(Rectangle())
+    }
+
+    @ViewBuilder private func artworkBackground() -> some View {
+        HStack(spacing: 0) {
+            ForEach(group.shows) { show in
+                if let imageData = show.imageData, let image = Image(imageData) {
+                    image.resizable()
+                    .aspectRatio(contentMode: .fill)
                 }
-                .padding([.horizontal, .bottom])
             }
         }
-        .frame(height: 100)
+
+        VisualEffectBlur(blurStyle: .systemUltraThinMaterialDark) {}
     }
 }
 
