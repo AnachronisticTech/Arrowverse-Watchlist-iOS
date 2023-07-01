@@ -32,8 +32,8 @@ struct UpNextListView<Content: View>: View {
             entity: Episode.entity(),
             sortDescriptors: [
                 NSSortDescriptor(keyPath: \Episode.show, ascending: true),
-                NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
                 NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+                NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
                 NSSortDescriptor(keyPath: \Episode.name, ascending: true)
             ],
             predicate: NSCompoundPredicate(
