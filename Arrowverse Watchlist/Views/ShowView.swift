@@ -55,6 +55,7 @@ struct ShowView: View {
         }
         .background(imageBackground(data: show.imageData))
         .clipShape(Rectangle())
+        .listRowInsets(.init())
     }
 
     @ViewBuilder private func imageBackground(data: Data?) -> some View {
@@ -62,8 +63,6 @@ struct ShowView: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-        } else {
-            EmptyView()
         }
 
         VisualEffectBlur(blurStyle: .systemUltraThinMaterialDark) {}

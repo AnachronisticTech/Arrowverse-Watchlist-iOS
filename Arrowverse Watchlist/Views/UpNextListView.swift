@@ -48,7 +48,6 @@ struct UpNextListView<Content: View>: View {
             }
         }
         .listStyle(.plain)
-        .listRowInsets(.none)
     }
 
     @ViewBuilder private func titleView(_ text: String) -> some View {

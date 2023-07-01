@@ -39,28 +39,31 @@ struct GroupEditView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Name", text: $groupName)
-                    .textFieldStyle(.roundedBorder)
+                VStack {
+                    TextField("Name", text: $groupName)
+                        .textFieldStyle(.roundedBorder)
 
-                NavigationLink {
-                    ShowSearchView(group: group)
-                } label: {
-                    HStack {
-                        Text("Add show")
-                            .font(.body)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundColor(.blue)
-                        Image(systemName: "plus.circle.fill")
-                            .font(.body)
-                            .foregroundColor(.blue)
+                    NavigationLink {
+                        ShowSearchView(group: group)
+                    } label: {
+                        HStack {
+                            Text("Add show")
+                                .font(.body)
+                                .multilineTextAlignment(.trailing)
+                                .foregroundColor(.blue)
+                            Image(systemName: "plus.circle.fill")
+                                .font(.body)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 20)
+                        .background(
+                            Capsule()
+                                .foregroundColor(Color(UIColor.systemGray5))
+                        )
                     }
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 20)
-                    .background(
-                        Capsule()
-                            .foregroundColor(Color(UIColor.systemGray5))
-                    )
                 }
+                .padding()
 
                 List {
                     Section(header: titleView("Shows")) {
@@ -69,11 +72,8 @@ struct GroupEditView: View {
                         }
                     }
                 }
-                .listRowInsets(.none)
                 .listStyle(.plain)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            .padding()
             .navigationTitle(title)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

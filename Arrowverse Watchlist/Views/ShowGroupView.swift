@@ -28,6 +28,16 @@ struct ShowGroupView: View {
             .first
     }
 
+    private var trackedSeriesLabel: String {
+        var text = "\(series.count) Series"
+        let trackedCount = series.filter({ $0.isTracking }).count
+        if trackedCount < series.count {
+            text += " (\(trackedCount) Tracked)"
+        }
+
+        return text
+    }
+
     init(group: SeriesCollection) {
         self.group = group
         seriesRequest = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
@@ -40,7 +50,7 @@ struct ShowGroupView: View {
                 Text(group.name)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text("\(series.count) Series (\(series.filter({ $0.isTracking }).count) Tracked)")
+                Text(trackedSeriesLabel)
                     .font(.caption)
                 Text("\(episodes.count) Episodes (\(episodes.filter({ $0.watched }).count) Watched)")
                     .font(.caption)
@@ -68,8 +78,9 @@ struct ShowGroupView: View {
         HStack(spacing: 0) {
             ForEach(series) { show in
                 if let imageData = show.imageData, let image = Image(imageData) {
-                    image.resizable()
-                    .aspectRatio(contentMode: .fill)
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                 }
             }
         }
