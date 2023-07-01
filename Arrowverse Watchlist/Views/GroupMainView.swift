@@ -19,10 +19,19 @@ struct GroupMainView: View {
     private var isRequestInProgress: Bool { requestsInProgress > 0 }
     @State private var isShowingReloadIndicator = false
 
-    @ObservedObject var group: SeriesCollection
+    private var group: SeriesCollection
+    private var request: FetchRequest<Series>
+    private var shows: [Series] {
+        request.wrappedValue.map({ $0 })
+    }
+
+    init(group: SeriesCollection) {
+        self.group = group
+        request = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
+    }
 
     var body: some View {
-        EpisodeListView(shows: group.trackedShows) { episode in
+        EpisodeListView(shows: shows.filter({ $0.isTracking })) { episode in
             EpisodeView(episode: episode)
                 .onTapGesture {
                     DatabaseManager.toggleWatchedStatus(for: episode)
@@ -61,7 +70,7 @@ struct GroupMainView: View {
             }
         }
         .sheet(isPresented: $isShowingUpNextSheet) {
-            UpNextListView(shows: group.shows) { episode in
+            UpNextListView(shows: shows) { episode in
                 EpisodeView(episode: episode)
                     .onTapGesture {
                         DatabaseManager.toggleWatchedStatus(for: episode)
@@ -73,14 +82,14 @@ struct GroupMainView: View {
         }
         .onAppear {
 //            print(group.shows.flatMap({ $0.episodes }).map({ $0.name }))
-            for show in group.shows where !show.hasPerformedFirstFetch {
+            for show in shows where !show.hasPerformedFirstFetch {
                 print(show.name)
                 fetch(show)
             }
         }
         .pullToRefresh(isShowing: $isShowingReloadIndicator) {
             guard requestsInProgress == 0 else { return }
-            for show in group.shows {
+            for show in shows {
                 fetch(show)
             }
         }

@@ -28,26 +28,7 @@ struct UpNextListView<Content: View>: View {
         @ViewBuilder _ content: @escaping (Episode) -> Content
     ) {
         self.content = content
-        request = FetchRequest<Episode>(
-            entity: Episode.entity(),
-            sortDescriptors: [
-                NSSortDescriptor(keyPath: \Episode.show, ascending: true),
-                NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
-                NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
-                NSSortDescriptor(keyPath: \Episode.name, ascending: true)
-            ],
-            predicate: NSCompoundPredicate(
-                type: .and,
-                subpredicates: [
-                    NSPredicate(format: "watched == %@", NSNumber(value: false)),
-                    NSCompoundPredicate(
-                        type: .or,
-                        subpredicates: shows
-                            .map { NSPredicate(format: "show == %@", $0) }
-                    )
-                ]
-            )
-        )
+        request = FetchRequest<Episode>(fetchRequest: DatabaseManager.getUpNextEpisodes(for: shows))
     }
 
     var body: some View {
@@ -83,7 +64,7 @@ struct UpNextListView<Content: View>: View {
 
 struct UpNextListView_Previews: PreviewProvider {
     static var previews: some View {
-        UpNextListView(shows: PersistenceController.group.shows) { episode in
+        UpNextListView(shows: [PersistenceController.series]) { episode in
             EpisodeView(episode: episode)
         }
     }

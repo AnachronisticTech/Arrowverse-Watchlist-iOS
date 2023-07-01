@@ -12,11 +12,20 @@ import TheMovieDBKit
 struct ShowSearchView: View {
     @Environment(\.managedObjectContext) var viewContext
 
-    @ObservedObject var group: SeriesCollection
+    private var group: SeriesCollection
+    private var request: FetchRequest<Series>
+    private var shows: FetchedResults<Series> {
+        request.wrappedValue
+    }
 
     @State private var searchTerm = ""
     @State private var searchResults: SeriesSearchResult?
     @State private var isShowingError: TheMovieDBError?
+
+    init(group: SeriesCollection) {
+        self.group = group
+        request = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
+    }
 
     var body: some View {
         ScrollView {
@@ -48,13 +57,13 @@ struct ShowSearchView: View {
                         Text(result.name)
                         Spacer()
                         Button {
-                            if let show = group.shows.first(where: { $0.id == result.id }) {
+                            if let show = shows.first(where: { $0.id == result.id }) {
                                 DatabaseManager.delete(show)
                             } else {
                                 DatabaseManager.save(result, into: group)
                             }
                         } label: {
-                            if group.shows.contains(where: { $0.id == result.id }) {
+                            if shows.contains(where: { $0.id == result.id }) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.green)
                             } else {

@@ -10,7 +10,29 @@ import SwiftUI
 import VisualEffects
 
 struct ShowGroupView: View {
-    @ObservedObject var group: SeriesCollection
+    private var group: SeriesCollection
+    private var seriesRequest: FetchRequest<Series>
+    private var series: FetchedResults<Series> {
+        seriesRequest.wrappedValue
+    }
+    private var episodesRequest: FetchRequest<Episode>
+    private var episodes: [Episode] {
+        episodesRequest
+            .wrappedValue
+            .filter { $0.show.isTracking }
+    }
+    private var nextEpisode: Episode? {
+        episodes
+            .filter { !$0.watched }
+            .sorted(by: Utils.episodeSorting)
+            .first
+    }
+
+    init(group: SeriesCollection) {
+        self.group = group
+        seriesRequest = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
+        episodesRequest = FetchRequest<Episode>(fetchRequest: DatabaseManager.getEpisodes(for: group))
+    }
 
     var body: some View {
         HStack {
@@ -18,12 +40,12 @@ struct ShowGroupView: View {
                 Text(group.name)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text("\(group.shows.count) Series (\(group.shows.filter({ $0.isTracking }).count) Tracked)")
+                Text("\(series.count) Series (\(series.filter({ $0.isTracking }).count) Tracked)")
                     .font(.caption)
-                Text("\(group.shows.flatMap({ $0.episodes }).count) Episodes (\(group.shows.flatMap({ $0.episodes }).filter({ $0.watched }).count) Watched)")
+                Text("\(episodes.count) Episodes (\(episodes.filter({ $0.watched }).count) Watched)")
                     .font(.caption)
 
-                if let next = group.nextUp {
+                if let next = nextEpisode {
                     if (next.airDate > Date(timeIntervalSinceNow: 0)) {
                         Text("Coming Soon: \(next.show.name) S\(next.seasonNumber)E\(next.episodeNumber) \(next.name)")
                             .padding(.top, 4)
@@ -44,7 +66,7 @@ struct ShowGroupView: View {
 
     @ViewBuilder private func artworkBackground() -> some View {
         HStack(spacing: 0) {
-            ForEach(group.shows) { show in
+            ForEach(series) { show in
                 if let imageData = show.imageData, let image = Image(imageData) {
                     image.resizable()
                     .aspectRatio(contentMode: .fill)

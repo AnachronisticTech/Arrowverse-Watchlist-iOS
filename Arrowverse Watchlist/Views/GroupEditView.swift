@@ -14,19 +14,24 @@ struct GroupEditView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State private var groupName: String = ""
-    @State private var icon: String = ""
 
-    @ObservedObject private var group: SeriesCollection
+    private var group: SeriesCollection
+    private var request: FetchRequest<Series>
+    private var shows: FetchedResults<Series> {
+        request.wrappedValue
+    }
 
     private let title: String
 
     init(creating group: SeriesCollection) {
         self.group = group
+        request = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
         title = "Add a new group"
     }
 
     init(updating group: SeriesCollection) {
         self.group = group
+        request = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
         title = "Update a group"
         _groupName = State(initialValue: group.name)
     }
@@ -59,7 +64,7 @@ struct GroupEditView: View {
 
                 List {
                     Section(header: titleView("Shows")) {
-                        ForEach(group.shows) { show in
+                        ForEach(shows) { show in
                             ShowView(show: show)
                         }
                     }

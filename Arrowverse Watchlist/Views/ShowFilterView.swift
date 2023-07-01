@@ -9,13 +9,24 @@
 import SwiftUI
 
 struct ShowFilterView<Content: View>: View {
-    @ObservedObject var group: SeriesCollection
-    @ViewBuilder var content: (Series) -> Content
+    private var content: (Series) -> Content
+    private var request: FetchRequest<Series>
+    private var shows: FetchedResults<Series> {
+        request.wrappedValue
+    }
+
+    init(
+        group: SeriesCollection,
+        @ViewBuilder _ content: @escaping (Series) -> Content
+    ) {
+        self.content = content
+        request = FetchRequest<Series>(fetchRequest: DatabaseManager.getSeries(for: group))
+    }
 
     var body: some View {
         List {
             Section(header: titleView("Choose shows to track")) {
-                ForEach(group.shows) { show in
+                ForEach(shows) { show in
                     content(show)
                 }
             }

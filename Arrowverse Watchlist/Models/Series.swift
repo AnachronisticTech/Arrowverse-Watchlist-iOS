@@ -21,8 +21,4 @@ public class Series: NSManagedObject, Identifiable {
     @NSManaged var group: SeriesCollection
 
     @NSManaged private var pEpisodes: NSSet
-    public var episodes: [Episode] {
-        let set = pEpisodes as? Set<Episode> ?? []
-        return set.sorted(by: Utils.episodeSorting)
-    }
 }

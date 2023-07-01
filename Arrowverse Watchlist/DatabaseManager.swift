@@ -14,6 +14,86 @@ class DatabaseManager {
 
     private init() {}
 
+    public static func getSeries(for group: SeriesCollection) -> NSFetchRequest<Series> {
+        let request = NSFetchRequest<Series>()
+        request.entity = Series.entity()
+        request.sortDescriptors = []
+        request.predicate = NSPredicate(format: "group == %@", group)
+        return request
+    }
+
+    public static func getEpisodes(for group: SeriesCollection) -> NSFetchRequest<Episode> {
+        let request = NSFetchRequest<Episode>()
+        request.entity = Episode.entity()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Episode.show, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.name, ascending: true)
+        ]
+        request.predicate = NSPredicate(format: "show.group == %@", group)
+        return request
+    }
+
+    public static func getEpisodes(for series: [Series]) -> NSFetchRequest<Episode> {
+        let request = NSFetchRequest<Episode>()
+        request.entity = Episode.entity()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Episode.show, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.name, ascending: true)
+        ]
+        request.predicate = NSCompoundPredicate(
+            type: .or,
+            subpredicates: series
+                .map { NSPredicate(format: "show == %@", $0) }
+        )
+        return request
+    }
+
+    public static func getUpNextEpisodes(for group: SeriesCollection) -> NSFetchRequest<Episode> {
+        let request = NSFetchRequest<Episode>()
+        request.entity = Episode.entity()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Episode.show, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.name, ascending: true)
+        ]
+        request.predicate = NSCompoundPredicate(
+            type: .and,
+            subpredicates: [
+                NSPredicate(format: "watched == %@", NSNumber(value: false)),
+                NSPredicate(format: "show.group == %@", group)
+            ]
+        )
+        return request
+    }
+
+    public static func getUpNextEpisodes(for series: [Series]) -> NSFetchRequest<Episode> {
+        let request = NSFetchRequest<Episode>()
+        request.entity = Episode.entity()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Episode.show, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.airDate, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.episodeNumber, ascending: true),
+            NSSortDescriptor(keyPath: \Episode.name, ascending: true)
+        ]
+        request.predicate = NSCompoundPredicate(
+            type: .and,
+            subpredicates: [
+                NSPredicate(format: "watched == %@", NSNumber(value: false)),
+                NSCompoundPredicate(
+                    type: .or,
+                    subpredicates: series
+                        .map { NSPredicate(format: "show == %@", $0) }
+                )
+            ]
+        )
+        return request
+    }
+
     public static func save(_ searchResult: SeriesSearchResult.SearchResult, into group: SeriesCollection) {
         let show = Series(context: container.viewContext)
         show.id = Int64(searchResult.id)
