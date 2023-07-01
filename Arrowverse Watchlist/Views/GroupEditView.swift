@@ -14,9 +14,6 @@ struct GroupEditView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @State private var groupName: String = ""
-    @State private var red: CGFloat = 0
-    @State private var green: CGFloat = 0
-    @State private var blue: CGFloat = 0
     @State private var icon: String = ""
 
     @ObservedObject private var group: SeriesCollection
@@ -32,9 +29,6 @@ struct GroupEditView: View {
         self.group = group
         title = "Update a group"
         _groupName = State(initialValue: group.name)
-        _red = State(initialValue: group.color.components![0])
-        _green = State(initialValue: group.color.components![1])
-        _blue = State(initialValue: group.color.components![2])
     }
 
     var body: some View {
@@ -42,44 +36,6 @@ struct GroupEditView: View {
             VStack {
                 TextField("Name", text: $groupName)
                     .textFieldStyle(.roundedBorder)
-
-                HStack(alignment: .center) {
-                    VStack {
-                        HStack(spacing: 20) {
-                            Circle()
-                                .foregroundColor(.red)
-                                .frame(width: 25, height: 25)
-                            Slider(value: $red, in: 0...1, step: 0.01)
-                        }
-                        Spacer()
-                        HStack(spacing: 20) {
-                            Circle()
-                                .foregroundColor(.green)
-                                .frame(width: 25, height: 25)
-                            Slider(value: $green, in: 0...1, step: 0.01)
-                        }
-                        Spacer()
-                        HStack(spacing: 20) {
-                            Circle()
-                                .foregroundColor(.blue)
-                                .frame(width: 25, height: 25)
-                            Slider(value: $blue, in: 0...1, step: 0.01)
-                        }
-                    }
-
-                    ZStack {
-                        Circle()
-                            .foregroundColor(Color(.sRGB, red: Double(red), green: Double(green), blue: Double(blue), opacity: 1))
-
-                        if let data = Data(base64Encoded: icon, options: .ignoreUnknownCharacters), let image = UIImage(data: data) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: 100 * cos(45), height: 100 * cos(45))
-                        }
-                    }
-                    .frame(width: 100, height: 100)
-                }
-                .frame(height: 110)
 
                 NavigationLink {
                     ShowSearchView(group: group)
@@ -125,7 +81,6 @@ struct GroupEditView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         group.name = groupName
-                        group.color = CGColor(red: red, green: green, blue: blue, alpha: 1)
                         group.isCreated = true
 
                         do {

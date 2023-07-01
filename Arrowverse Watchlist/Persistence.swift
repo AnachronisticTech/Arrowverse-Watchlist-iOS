@@ -19,12 +19,10 @@ struct PersistenceController {
         let seriesCollection = SeriesCollection(context: viewContext)
         seriesCollection.name = "Stargate"
         seriesCollection.isCreated = true
-        seriesCollection.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
 //        let series = Series(context: viewContext)
 //        series.name = "Stargate SG-1"
 //        series.group = seriesCollection
-//        series.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
 //        let episode = Episode(context: viewContext)
 //        episode.name = "Children of the Gods"
@@ -78,7 +76,6 @@ extension PersistenceController {
         let seriesCollection = SeriesCollection(context: PersistenceController.preview.container.viewContext)
         seriesCollection.name = "Stargate"
         seriesCollection.imageData = UIImage.sampleData
-        seriesCollection.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         return seriesCollection
     }
 
@@ -87,7 +84,6 @@ extension PersistenceController {
         series.name = "Stargate SG-1"
         series.imageData = UIImage.sampleData
         series.group = group
-        series.color = CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         return series
     }
 

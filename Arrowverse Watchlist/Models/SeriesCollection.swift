@@ -13,9 +13,6 @@ import CoreData
 public class SeriesCollection: NSManagedObject, Identifiable {
     @NSManaged var name: String
     @NSManaged var imageData: Data?
-    @NSManaged private var red: Float
-    @NSManaged private var green: Float
-    @NSManaged private var blue: Float
     @NSManaged var isCreated: Bool
 
     @NSManaged private var pShows: NSSet
@@ -33,17 +30,6 @@ public class SeriesCollection: NSManagedObject, Identifiable {
                 .filter { !$0.watched }
                 .sorted(by: Utils.episodeSorting(_:_:))
                 .first
-        }
-    }
-
-    var color: CGColor {
-        get {
-            CGColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
-        }
-        set {
-            red = Float(newValue.components![0])
-            green = Float(newValue.components![1])
-            blue = Float(newValue.components![2])
         }
     }
 }
