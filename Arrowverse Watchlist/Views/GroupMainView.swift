@@ -64,6 +64,7 @@ struct GroupMainView: View {
         .sheet(isPresented: $isShowingFilterSheet) {
             ShowFilterView(group: group) { show in
                 ShowView(show: show)
+                    .listRowInsets(.init())
                     .onTapGesture {
                         DatabaseManager.toggleTrackingStatus(for: show)
                     }

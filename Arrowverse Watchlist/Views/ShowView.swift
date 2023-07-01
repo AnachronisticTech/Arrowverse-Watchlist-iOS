@@ -12,45 +12,47 @@ import VisualEffects
 struct ShowView: View {
     @ObservedObject var show: Series
 
+    private var episodesRequest: FetchRequest<Episode>
+    private var episodes: FetchedResults<Episode> {
+        episodesRequest.wrappedValue
+    }
+
+    init(show: Series) {
+        self.show = show
+        episodesRequest = FetchRequest<Episode>(fetchRequest: DatabaseManager.getEpisodes(for: [show]))
+    }
+
     var body: some View {
-        ZStack {
-            VisualEffectBlur(blurStyle: .systemUltraThinMaterial) {}
-
-            HStack {
-                if let imageData = show.imageData, let image = Image(imageData) {
-                    HStack {
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 65, maxHeight: 65)
-                    }
-                    .frame(width: 65, height: 65, alignment: .center)
-                    .padding([.leading, .top, .bottom], 4)
-                }
-
-                VStack(alignment: .leading) {
-                    Text(show.name)
-                        .font(.title)
-                }
-                .foregroundColor(Color(UIColor.label))
-                Spacer()
-
-                if show.isTracking {
-                    Image(systemName: "checkmark.circle.fill")
+        HStack(spacing: 0) {
+            if let imageData = show.imageData, let image = Image(imageData) {
+                HStack {
+                    image
                         .resizable()
-                        .foregroundColor(.green)
-                        .frame(width: 25, height: 25)
-                        .padding(.trailing)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 65, maxHeight: 65)
                 }
             }
-            .background(
-                RoundedRectangle(cornerRadius: 6)
-                    .foregroundColor(Color(UIColor.systemBackground))
-            )
-            .padding(8)
+
+            VStack(alignment: .leading) {
+                Text(show.name)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("\(episodes.count) Episodes (\(episodes.filter({ $0.watched }).count) Watched)")
+                    .font(.caption)
+            }
+            .foregroundColor(.white)
+            .padding()
+
+            Spacer()
+
+            if show.isTracking {
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .frame(width: 25, height: 25)
+                    .padding(.trailing)
+            }
         }
-        .contentShape(Rectangle())
-        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
         .background(imageBackground(data: show.imageData))
         .clipShape(Rectangle())
     }
@@ -63,6 +65,8 @@ struct ShowView: View {
         } else {
             EmptyView()
         }
+
+        VisualEffectBlur(blurStyle: .systemUltraThinMaterialDark) {}
     }
 }
 
