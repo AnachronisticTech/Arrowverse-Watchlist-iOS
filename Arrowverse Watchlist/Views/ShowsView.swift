@@ -8,6 +8,8 @@
 
 import SwiftUI
 import CoreData
+import ATCommon
+import ATiOS
 
 struct ShowsView: View {
     @Environment(\.managedObjectContext) var viewContext
@@ -23,9 +25,14 @@ struct ShowsView: View {
     private var groups: FetchedResults<SeriesCollection>
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(groups) { group in
+//                    NavigationLink {
+//                        GroupMainView(group: group)
+//                    } label: {
+//                        ShowGroupView(group: group)
+//                    }
                     ShowGroupView(group: group)
                         .listRowInsets(.init())
                         .background(
@@ -40,13 +47,14 @@ struct ShowsView: View {
                         )
                         .contentShape(RoundedRectangle(cornerRadius: 10))
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit", systemImage: "pencil.circle") {
                                 activeSheet = .edit(group)
                             }
-                            Button {
+
+                            Divider()
+
+                            Button("Delete", systemImage: "trash", role: .destructive) {
                                 DatabaseManager.delete(group)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
                             }
                         }
                 }
@@ -55,22 +63,20 @@ struct ShowsView: View {
             .navigationTitle("Groups")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                }
+
+                ToolbarItem {
                     Button {
                         activeSheet = .add
                     } label: {
                         Image(systemName: "pencil.circle")
                     }
                 }
-
-                #if DEBUG
-                ToolbarItem(placement: .destructiveAction) {
-                    Button {
-                        DatabaseManager.deleteAll()
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                }
-                #endif
             }
         }
         .navigationViewStyle(.stack)
@@ -101,5 +107,13 @@ struct ShowsView_Previews: PreviewProvider {
     static var previews: some View {
         ShowsView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.appIconManager, AppIconManager(PrimaryAppIcon(), alternatives: []))
+            .environment(\.store, Store(
+                donationIds: [
+                    "com.anachronistictech.smalltip",
+                    "com.anachronistictech.mediumtip",
+                    "com.anachronistictech.largetip"
+                ]
+            ))
     }
 }

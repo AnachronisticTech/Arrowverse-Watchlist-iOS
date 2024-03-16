@@ -8,10 +8,13 @@
 
 import SwiftUI
 import Introspect
+import ATiOS
 
 struct GroupEditView: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.themeManager) private var themeManager
+    @Environment(\.logger) private var logger
 
     @State private var groupName: String = ""
 
@@ -50,10 +53,10 @@ struct GroupEditView: View {
                             Text("Add show")
                                 .font(.body)
                                 .multilineTextAlignment(.trailing)
-                                .foregroundColor(.blue)
+                                .foregroundColor(themeManager.accentColor)
                             Image(systemName: "plus.circle.fill")
                                 .font(.body)
-                                .foregroundColor(.blue)
+                                .foregroundColor(themeManager.accentColor)
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)
@@ -91,7 +94,7 @@ struct GroupEditView: View {
                         do {
                             try viewContext.save()
                         } catch {
-                            print("Failed to save group with error: \(error)")
+                            logger.log(.error, message: "Failed to save group with error: \(error)")
                         }
 
                         presentationMode.wrappedValue.dismiss()

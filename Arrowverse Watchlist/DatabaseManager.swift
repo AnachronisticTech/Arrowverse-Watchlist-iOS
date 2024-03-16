@@ -106,7 +106,7 @@ class DatabaseManager {
                 do {
                     try container.viewContext.save()
                 } catch {
-                    print("Failed to save show image data: \(error)")
+                    Utils.logger.log(.error, message: "Failed to save show image data: \(error)")
                 }
             }
         }
@@ -114,14 +114,14 @@ class DatabaseManager {
         do {
             try container.viewContext.save()
         } catch {
-            print("Failed to save show: \(error)")
+            Utils.logger.log(.error, message: "Failed to save show: \(error)")
         }
     }
 
     public static func save(_ episodes: [Season.Episode], into show: Series) {
         container.performBackgroundTask { context in
             guard let fetchedShow = context.object(with: show.objectID) as? Series else {
-                print("[ERROR] Could not fetch show \(show) in background context")
+                Utils.logger.log(.error, message: "Could not fetch show \(show) in background context")
                 return
             }
 
@@ -155,7 +155,7 @@ class DatabaseManager {
             do {
                 try context.save()
             } catch {
-                print("[ERROR] There was a problem saving episodes: \(error)")
+                Utils.logger.log(.error, message: "There was a problem saving episodes: \(error)")
             }
         }
     }
@@ -166,7 +166,7 @@ class DatabaseManager {
         do {
             try container.viewContext.save()
         } catch {
-            print("[ERROR] Could not save watch state for \(episode). \(error)")
+            Utils.logger.log(.error, message: "Could not save watch state for \(episode). \(error)")
         }
     }
 
@@ -175,7 +175,7 @@ class DatabaseManager {
         do {
             try container.viewContext.save()
         } catch {
-            print("[ERROR] Could not save tracking state for \(show). \(error)")
+            Utils.logger.log(.error, message: "Could not save tracking state for \(show). \(error)")
         }
     }
 
@@ -185,7 +185,7 @@ class DatabaseManager {
         do {
             try container.viewContext.save()
         } catch {
-            print("Could not delete object \(group): \(error)")
+            Utils.logger.log(.error, message: "Could not delete object \(group): \(error)")
         }
     }
 
@@ -195,12 +195,12 @@ class DatabaseManager {
         do {
             try container.viewContext.save()
         } catch {
-            print("Failed to save show state: \(error)")
+            Utils.logger.log(.error, message: "Failed to save show state: \(error)")
         }
     }
 
-    #if DEBUG
     public static func deleteAll() {
+        #if DEBUG
         let fetchRequest = Series.fetchRequest()
         let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
@@ -208,7 +208,7 @@ class DatabaseManager {
             try container.viewContext.execute(batchDelete)
             try container.viewContext.save()
         } catch {
-            print("Could not delete shows with error \(error)")
+            Utils.logger.log(.error, message: "Could not delete shows with error \(error)")
         }
 
         let fetchRequest2 = SeriesCollection.fetchRequest()
@@ -218,8 +218,8 @@ class DatabaseManager {
             try container.viewContext.execute(batchDelete2)
             try container.viewContext.save()
         } catch {
-            print("Could not delete showgroups with error \(error)")
+            Utils.logger.log(.error, message: "Could not delete showgroups with error \(error)")
         }
+        #endif
     }
-    #endif
 }

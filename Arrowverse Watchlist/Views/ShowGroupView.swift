@@ -57,10 +57,10 @@ struct ShowGroupView: View {
 
                 if let next = nextEpisode {
                     if (next.airDate > Date(timeIntervalSinceNow: 0)) {
-                        Text("Coming Soon: \(next.show.name) S\(next.seasonNumber)E\(next.episodeNumber) \(next.name)")
+                        Text("Coming Soon: \(episodeIdentifier(next))")
                             .padding(.top, 4)
                     } else {
-                        Text("Next Up: \(next.show.name) S\(next.seasonNumber)E\(next.episodeNumber) \(next.name)")
+                        Text("Next Up: \(episodeIdentifier(next))")
                             .padding(.top, 4)
                     }
                 }
@@ -86,6 +86,10 @@ struct ShowGroupView: View {
         }
 
         VisualEffectBlur(blurStyle: .systemUltraThinMaterialDark) {}
+    }
+
+    private func episodeIdentifier(_ episode: Episode) -> String {
+        return "\(episode.show.name) S\(episode.seasonNumber)E\(episode.episodeNumber) \(episode.name)"
     }
 }
 

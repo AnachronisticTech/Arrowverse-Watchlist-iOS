@@ -8,8 +8,9 @@
 
 import Foundation
 import TheMovieDBKit
+import ATCommon
 
-struct Utils {
+enum Utils {
     public static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d, yyyy"
@@ -17,6 +18,10 @@ struct Utils {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
+    
+    public static let logger: Logger = LoggerBuilder
+        .createLogger("Watchlist", from: ConsoleLogger())
+        .build()
 
     private static var imageDataCache = [String: Data]()
 

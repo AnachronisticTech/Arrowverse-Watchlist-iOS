@@ -20,16 +20,16 @@ struct PersistenceController {
         seriesCollection.name = "Stargate"
         seriesCollection.isCreated = true
 
-//        let series = Series(context: viewContext)
-//        series.name = "Stargate SG-1"
-//        series.group = seriesCollection
+        let series = Series(context: viewContext)
+        series.name = "Stargate SG-1"
+        series.group = seriesCollection
 
-//        let episode = Episode(context: viewContext)
-//        episode.name = "Children of the Gods"
-//        episode.show = series
-//        episode.seasonNumber = 1
-//        episode.episodeNumber = 1
-//        episode.airDate = Date(timeIntervalSinceNow: 0)
+        let episode = Episode(context: viewContext)
+        episode.name = "Children of the Gods"
+        episode.show = series
+        episode.seasonNumber = 1
+        episode.episodeNumber = 1
+        episode.airDate = Date(timeIntervalSinceNow: 0)
 
         do {
             try viewContext.save()

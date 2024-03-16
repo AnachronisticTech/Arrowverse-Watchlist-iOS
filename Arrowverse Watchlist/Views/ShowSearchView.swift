@@ -28,26 +28,11 @@ struct ShowSearchView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    TextField("Name", text: $searchTerm)
-                        .textFieldStyle(.roundedBorder)
-
-                    Button("Search") {
-                        guard !searchTerm.isEmpty else { return }
-                        TheMovieDB.Search.shows(searchTerm) { result in
-                            switch result {
-                                case .success(let searchResults):
-                                    self.searchResults = searchResults
-                                case .failure(let error):
-                                    isShowingError = error
-                            }
-                        }
-                    }
-                }
+        VStack {
+            searchBarView()
                 .padding()
 
+            List {
                 ForEach(searchResults?.results ?? [], id: \.id) { result in
                     HStack {
                         if let imagePath = result.posterPath {
@@ -72,9 +57,10 @@ struct ShowSearchView: View {
                             }
                         }
                     }
+                    .listRowInsets(.init())
                 }
-                .padding()
             }
+            .listStyle(.plain)
         }
         .navigationTitle("Search for a show")
         .alert(item: $isShowingError) { error in
@@ -83,6 +69,33 @@ struct ShowSearchView: View {
                 message: Text(String(describing: error)),
                 dismissButton: .default(Text("Ok"))
             )
+        }
+    }
+
+    @ViewBuilder private func searchBarView() -> some View {
+        HStack {
+            TextField("Name", text: $searchTerm)
+                .textFieldStyle(.roundedBorder)
+
+            if !searchTerm.isEmpty {
+                Button {
+                    searchTerm = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                }
+            }
+
+            Button("Search") {
+                guard !searchTerm.isEmpty else { return }
+                TheMovieDB.Search.shows(searchTerm) { result in
+                    switch result {
+                        case .success(let searchResults):
+                            self.searchResults = searchResults
+                        case .failure(let error):
+                            isShowingError = error
+                    }
+                }
+            }
         }
     }
 }
